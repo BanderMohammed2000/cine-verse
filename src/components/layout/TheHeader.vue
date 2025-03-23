@@ -1,11 +1,12 @@
 <template>
   <header id="header">
     <div class="overlay"></div>
+    <div class="header-background"></div>
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
           ><div class="d-flex align-items-center">
-            <img class="logo" src="/public/logo/logo.png" alt="logo" />
+            <img class="logo" src="/logo/logo.png" alt="logo" />
             <p class="mb-0 ms-1">CineVerse</p>
           </div></a
         >
@@ -46,10 +47,10 @@
         </div>
       </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container mt-5 position-relative">
       <div class="row">
         <div class="col-12">
-          <h1 class="text-center responsive-text">
+          <h1 class="text-center responsive-text mb-5">
             Your Weekend Buddy For
             <span class="light-pink-color">This Week</span>
           </h1>
@@ -73,15 +74,26 @@ export default {
 #header {
   position: relative;
 }
+.header-background {
+  width: 100%;
+  height: 100%;
+  background-image: url("/movie/breaking-bad.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  z-index: -1;
+  filter: blur(3px);
+}
 .overlay {
   background-color: rgba(10, 15, 34, 0.5);
+  background-color: rgba(14, 23, 54, 0.5);
   /* background-color: rgba(0, 0, 0, 0.5); */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
 }
 
 /*navbar*/

@@ -42,6 +42,26 @@ export default {
           description: "Web developer",
           image: "/movie/fight-club.jpg",
         },
+        {
+          title: "Bander Ali",
+          description: "Web developer",
+          image: "/movie/fight-club.jpg",
+        },
+        {
+          title: "Bander Ali",
+          description: "Web developer",
+          image: "/movie/fight-club.jpg",
+        },
+        {
+          title: "Bander Ali",
+          description: "Web developer",
+          image: "/movie/fight-club.jpg",
+        },
+        {
+          title: "Bander Ali",
+          description: "Web developer",
+          image: "/movie/fight-club.jpg",
+        },
       ],
       scrollPosition: 0,
       cardWidth: 0,
@@ -158,10 +178,91 @@ export default {
 </script>
 
 <style scoped>
+.carousel-item:nth-child(3) {
+  scale: 0.9;
+  transform: translateX(20px);
+  /* right: -12%; */
+  /* position: absolute; */
+}
+
+.carousel-item:nth-child(3) .card-movie {
+  width: 350px;
+}
+
+/* الصور الجانبية */
+.carousel-item:nth-child(2) {
+  /* transform: translateX(-55px) rotateY(10deg); */
+  /* transform: translateX(-55px) rotateY(44deg); */
+  /* transform: translateX(48px) rotateY(30deg); */
+  /* transform: translateX(50px) rotateY(30deg); */
+  transform: translateX(90px) rotateY(30deg);
+  z-index: 2;
+  /* opacity: 0.8; */
+  scale: 0.8;
+}
+
+.carousel-item:nth-child(2) .card-movie {
+  width: 290px;
+}
+
+.carousel-item:nth-child(4) {
+  /* transform: translateX(55px) rotateY(-10deg); */
+  /* transform: translateX(55px) rotateY(-44deg); */
+  /* transform: translateX(51px) rotateY(-44deg); */
+  transform: translateX(-60px) rotateY(-44deg);
+  z-index: 2;
+  scale: 0.8;
+
+  /* opacity: 0.8; */
+}
+
+.carousel-item:nth-child(4) .card-movie {
+  width: 290px;
+}
+
+/* الصور الأبعد */
+.carousel-item:nth-child(1) {
+  /* transform: translateX(-130px) rotateY(20deg); */
+  /* transform: translateX(-130px) rotateY(50deg); */
+  /* transform: translateX(119px) rotateY(50deg); */
+  /* transform: translateX(110px) rotateY(50deg); */
+  transform: translateX(180px) rotateY(50deg);
+  z-index: 1;
+  /* opacity: 0.5; */
+  scale: 0.7;
+}
+
+.carousel-item:nth-child(1) .card-movie {
+  width: 260px;
+}
+
+.carousel-item:nth-child(5) {
+  /* transform: translateX(130px) rotateY(-20deg); */
+  /* transform: translateX(130px) rotateY(-50deg); */
+  /* transform: translateX(120px) rotateY(-50deg); */
+  transform: translateX(-152px) rotateY(-50deg);
+  z-index: 1;
+  scale: 0.7;
+
+  /* opacity: 0.5; */
+}
+
+.carousel-item:nth-child(5) .card-movie {
+  width: 260px;
+}
+
+/*-------------------------*/
 #testimonialCarousel .carousel-inner {
   height: 350px;
   overflow: hidden;
+  justify-content: center;
   align-items: center;
+  perspective: 1000px; /* يجعل الصور تبدو ثلاثية الأبعاد */
+  position: relative;
+  height: fit-content;
+  gap: 20px;
+  /* height: 400px; */
+  /* align-items: center; */
 }
 
 .carousel-inner {
@@ -209,7 +310,8 @@ export default {
   .carousel-inner {
     display: flex;
     /* width: 90%; */
-    width: 100%;
+    /* width: 100%; */
+    width: 95%;
     margin-inline: auto;
     padding: 1em 0;
     overflow: hidden;
@@ -217,7 +319,7 @@ export default {
   .carousel-item {
     display: block;
     margin-right: 0;
-    flex: 0 0 calc(100% / 2);
+    /* flex: 0 0 calc(100% / 2); */
   }
 }
 
@@ -226,7 +328,7 @@ export default {
     display: block;
     margin-right: 0;
     /* flex: 0 0 calc(99% / 3); */
-    flex: 0 0 calc(100% / 3);
+    /* flex: 0 0 calc(100% / 5); */
     /* flex: 0 0 450px; */
   }
 }
