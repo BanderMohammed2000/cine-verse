@@ -9,11 +9,11 @@
       <div class="carousel-inner" ref="carouselInner">
         <div
           class="carousel-item"
-          v-for="(movie, index) in moviesWeek"
+          v-for="(data, index) in moviesWeek"
           :key="index"
           :class="{ active: index === getActiveItemIndex }"
         >
-          <home-card :movie="movie"></home-card>
+          <home-card :movie="data"></home-card>
         </div>
       </div>
       <button class="carousel-control-prev" @click="scrollPrev">
@@ -30,6 +30,7 @@
 
 <script>
 import HomeCard from "./HomeCard.vue";
+
 export default {
   components: {
     HomeCard,
@@ -38,29 +39,19 @@ export default {
     return {
       moviesWeek: [
         {
-          title: "Bander Ali",
-          description: "Web developer",
           image: "/movie/fight-club.jpg",
         },
         {
-          title: "Bander Ali",
-          description: "Web developer",
-          image: "/movie/fight-club.jpg",
+          image: "/movie/bad-boys.jpg",
         },
         {
-          title: "Bander Ali",
-          description: "Web developer",
-          image: "/movie/fight-club.jpg",
+          image: "/movie/kraven.jpg",
         },
         {
-          title: "Bander Ali",
-          description: "Web developer",
-          image: "/movie/fight-club.jpg",
+          image: "/movie/den.jpg",
         },
         {
-          title: "Bander Ali",
-          description: "Web developer",
-          image: "/movie/fight-club.jpg",
+          image: "/movie/the-revenant.jpg",
         },
       ],
       scrollPosition: 0,
@@ -80,13 +71,13 @@ export default {
       const carouselInner = this.$refs.carouselInner;
       const carouselItems = carouselInner.children;
 
-      // this.numOfClicksNext = Math.floor((this.commentData.length - 3) / 2) + 1;
+      // this.numOfClicksNext = Math.floor((this.moviesWeek.length - 3) / 2) + 1;
 
-      let commentDataLength = (this.commentData.length - 3) / 2;
+      let moviesWeekLength = (this.moviesWeek.length - 3) / 2;
       this.numOfClicksNext =
-        commentDataLength % 1 !== 0
-          ? Math.floor(commentDataLength) + 1
-          : commentDataLength;
+        moviesWeekLength % 1 !== 0
+          ? Math.floor(moviesWeekLength) + 1
+          : moviesWeekLength;
 
       if (carouselItems.length > 0) {
         // offsetWidth يعطينا العرض الفعلي (بالبكسل) لهذا العنصر، بما في ذلك الـ padding والـ border، لكنه لا يشمل الـ margin.
@@ -133,7 +124,7 @@ export default {
       // let tabletSize = window.matchMedia("(min-width: 576px)").matches;
       let labSize = window.matchMedia("(min-width: 768px)").matches;
 
-      this.numOfCardsShown = mobileSize ? 1 : labSize ? 3 : 2;
+      this.numOfCardsShown = mobileSize ? 1 : labSize ? 5 : 2;
       // console.log(this.numOfCardsShown);
     },
     scrollNext() {
@@ -141,7 +132,7 @@ export default {
       //   this.carouselWidth - this.cardWidth * this.numOfCardsShown
       if (
         this.numOfClicksNext <
-        this.commentData.length - this.numOfCardsShown
+        this.moviesWeek.length - this.numOfCardsShown
       ) {
         this.scrollPosition += this.cardWidth;
 
@@ -178,91 +169,130 @@ export default {
 </script>
 
 <style scoped>
-.carousel-item:nth-child(3) {
-  scale: 0.9;
-  transform: translateX(20px);
-  /* right: -12%; */
-  /* position: absolute; */
+#testimonialCarousel .carousel-inner {
+  /* height: 350px; */
+  overflow: hidden;
+  align-items: center;
 }
 
-.carousel-item:nth-child(3) .card-movie {
-  width: 350px;
+/* .carousel-inner {
+  padding: 1em;
+} */
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 34px;
+  height: 34px;
+  background-color: gray;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15),
+    -1px -1px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* الصور الجانبية */
-.carousel-item:nth-child(2) {
-  /* transform: translateX(-55px) rotateY(10deg); */
-  /* transform: translateX(-55px) rotateY(44deg); */
-  /* transform: translateX(48px) rotateY(30deg); */
-  /* transform: translateX(50px) rotateY(30deg); */
-  transform: translateX(90px) rotateY(30deg);
+.carousel-control-next,
+.carousel-control-prev {
+  opacity: 0.5;
+  color: #ffffff;
+}
+
+.carousel-control-next:hover,
+.carousel-control-prev:hover {
+  color: #ffffff;
+  opacity: inherit;
+}
+
+.carousel-control-next {
+  right: 10px;
+}
+
+.carousel-control-prev {
+  left: 10px;
+}
+
+/* .carousel-item.active {
+  position: relative;
+} */
+
+.carousel-item {
+  position: static;
+}
+
+.carousel-item.active .card-movie {
+  /* transform: scale(1.1) translateY(-13px); */
+  /* margin: 0 25px; */
   z-index: 2;
-  /* opacity: 0.8; */
-  scale: 0.8;
+  position: absolute;
+  /* width: 100%; */
+  width: 22%;
+  transform: translate(-68%, -50%) scale(1.1);
+  transition: all 0.5s ease;
 }
 
-.carousel-item:nth-child(2) .card-movie {
-  width: 290px;
+@media screen and (min-width: 576px) {
+  .carousel-inner {
+    display: flex;
+    /* width: 90%; */
+    width: 100%;
+    margin-inline: auto;
+    padding: 1em 0;
+    overflow: hidden;
+  }
+  .carousel-item {
+    display: block;
+    margin-right: 0;
+    flex: 0 0 calc(100% / 2);
+  }
 }
 
-.carousel-item:nth-child(4) {
-  /* transform: translateX(55px) rotateY(-10deg); */
-  /* transform: translateX(55px) rotateY(-44deg); */
-  /* transform: translateX(51px) rotateY(-44deg); */
-  transform: translateX(-60px) rotateY(-44deg);
-  z-index: 2;
-  scale: 0.8;
-
-  /* opacity: 0.8; */
+@media screen and (min-width: 768px) {
+  .carousel-item {
+    display: block;
+    margin-right: 0;
+    /* flex: 0 0 calc(99% / 3); */
+    flex: 0 0 calc(100% / 5);
+    /* flex: 0 0 450px; */
+  }
 }
 
-.carousel-item:nth-child(4) .card-movie {
-  width: 290px;
+@media screen and (max-width: 851px) {
+  .carousel-item.active .card {
+    transform: scale(1) translateY(0);
+    margin: 0 0.5em;
+  }
 }
 
-/* الصور الأبعد */
-.carousel-item:nth-child(1) {
-  /* transform: translateX(-130px) rotateY(20deg); */
-  /* transform: translateX(-130px) rotateY(50deg); */
-  /* transform: translateX(119px) rotateY(50deg); */
-  /* transform: translateX(110px) rotateY(50deg); */
-  transform: translateX(180px) rotateY(50deg);
-  z-index: 1;
-  /* opacity: 0.5; */
-  scale: 0.7;
+@media (max-width: 575px) {
+  .carousel-inner {
+    display: flex;
+    /* width: 90%; */
+    width: 90%;
+    margin-inline: auto;
+    padding: 1em 0;
+    /* overflow: hidden; */
+  }
+  .carousel-item {
+    display: block;
+    margin-right: 0;
+    flex: 0 0 100%;
+    /* flex: 0 0 450px; */
+  }
+  .carousel-control-next {
+    right: 7px;
+  }
+
+  .carousel-control-prev {
+    left: 7px;
+  }
 }
+</style>
 
-.carousel-item:nth-child(1) .card-movie {
-  width: 260px;
-}
-
-.carousel-item:nth-child(5) {
-  /* transform: translateX(130px) rotateY(-20deg); */
-  /* transform: translateX(130px) rotateY(-50deg); */
-  /* transform: translateX(120px) rotateY(-50deg); */
-  transform: translateX(-152px) rotateY(-50deg);
-  z-index: 1;
-  scale: 0.7;
-
-  /* opacity: 0.5; */
-}
-
-.carousel-item:nth-child(5) .card-movie {
-  width: 260px;
-}
-
-/*-------------------------*/
+<!-- <style scoped>
 #testimonialCarousel .carousel-inner {
   height: 350px;
   overflow: hidden;
-  justify-content: center;
   align-items: center;
-  perspective: 1000px; /* يجعل الصور تبدو ثلاثية الأبعاد */
-  position: relative;
-  height: fit-content;
-  gap: 20px;
-  /* height: 400px; */
-  /* align-items: center; */
 }
 
 .carousel-inner {
@@ -309,9 +339,8 @@ export default {
 @media screen and (min-width: 576px) {
   .carousel-inner {
     display: flex;
-    /* width: 90%; */
+    width: 90%;
     /* width: 100%; */
-    width: 95%;
     margin-inline: auto;
     padding: 1em 0;
     overflow: hidden;
@@ -319,7 +348,7 @@ export default {
   .carousel-item {
     display: block;
     margin-right: 0;
-    /* flex: 0 0 calc(100% / 2); */
+    flex: 0 0 calc(100% / 2);
   }
 }
 
@@ -328,7 +357,7 @@ export default {
     display: block;
     margin-right: 0;
     /* flex: 0 0 calc(99% / 3); */
-    /* flex: 0 0 calc(100% / 5); */
+    flex: 0 0 calc(100% / 3);
     /* flex: 0 0 450px; */
   }
 }
@@ -363,4 +392,4 @@ export default {
     left: 7px;
   }
 }
-</style>
+</style> -->

@@ -1,9 +1,5 @@
 <template>
   <div class="card-movie" :style="{ backgroundImage: `url(${movie.image})` }">
-    <div class="card-movie-text">
-      <div class="card-movie-title">{{ movie.title }}</div>
-      <div class="card-movie-description">{{ movie.description }}</div>
-    </div>
     <div class="overlay"></div>
   </div>
 </template>
@@ -15,16 +11,17 @@ export default {
 
 <style scoped>
 .card-movie {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; */
   /* width: 340px; */
 
   /* height: 100%; */
-  height: 540px;
+  height: 480px;
   /* margin: 0 0.5em; */
-  /* border-radius: 3px; */
+  margin: 0 0.2em;
+  border-radius: 8px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -34,18 +31,15 @@ export default {
 }
 
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(90, 104, 144, 0.5);
   /* background-color: rgba(0, 0, 0, 0.5); */
   position: absolute;
+  border-radius: 8px;
+
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.card-movie-text {
-  position: relative;
-  z-index: 1;
 }
 
 /*-----------------*/

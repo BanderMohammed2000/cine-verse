@@ -57,15 +57,18 @@
         </div>
       </div>
     </div>
-    <home-slider></home-slider>
+    <!-- <home-slider></home-slider> -->
+    <effect-slider></effect-slider>
   </header>
 </template>
 
 <script>
 import HomeSlider from "../home/HomeSlider.vue";
+import EffectSlider from "../home/EffectSlider.vue";
 export default {
   components: {
     HomeSlider,
+    EffectSlider,
   },
 };
 </script>
@@ -73,20 +76,23 @@ export default {
 <style scoped>
 #header {
   position: relative;
+  /* background-color: #0d1836; */
 }
 .header-background {
   width: 100%;
   height: 100%;
-  background-image: url("/movie/breaking-bad.jpg");
+  background-image: url("/movie/fight-club-bk.jpeg");
+  /* background-image: url("/movie/breaking-bad.jpg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
   z-index: -1;
   filter: blur(3px);
+  /* filter: blur(5px); */
 }
 .overlay {
-  background-color: rgba(10, 15, 34, 0.5);
+  /* background-color: rgba(10, 15, 34, 0.5); */
   background-color: rgba(14, 23, 54, 0.5);
   /* background-color: rgba(0, 0, 0, 0.5); */
   position: absolute;
@@ -104,6 +110,18 @@ export default {
 
 .navbar .navbar-brand .logo {
   width: 50px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  opacity: 0.8;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  opacity: 1;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  opacity: 1;
 }
 
 .navbar form .btn-login {
