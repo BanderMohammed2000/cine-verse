@@ -1,41 +1,18 @@
 <template>
   <div class="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(data, index) in slides" :key="index">
+      <div class="swiper-slide" v-for="(slide, index) in slides" :key="index">
         <div class="overlay"></div>
-        <img :src="data.image" :alt="data.title" />
-        <div class="title">
+        <img :src="slide.image" :alt="slide.name" />
+        <!-- <div class="title">
           <span>{{ data.title }}</span>
+        </div> -->
+        <div class="info">
+          <h2 class="text name">{{ slide.name }}</h2>
+          <h4 class="text category">{{ slide.category }}</h4>
+          <p class="text description">{{ slide.description }}</p>
         </div>
       </div>
-      <!-- <div class="swiper-slide">
-        <div class="overlay"></div>
-        <img src="/movie/fight-club.jpg" alt="" />
-        <div class="title">
-          <span>Fight Club</span>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="overlay"></div>
-        <img src="/movie/the-revenant.jpg" alt="" />
-        <div class="title">
-          <span>The Revenant</span>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="overlay"></div>
-        <img src="/movie/bad-boys.jpg" alt="" />
-        <div class="title">
-          <span>Bad Boys</span>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="overlay"></div>
-        <img src="/movie/joker.jpg" alt="" />
-        <div class="title">
-          <span>Joker</span>
-        </div>
-      </div> -->
     </div>
 
     <div class="swiper-button-prev"></div>
@@ -57,11 +34,36 @@ export default {
     return {
       swiper: null,
       slides: [
-        { image: "movie/den.jpg", title: "Den" },
-        { image: "movie/fight-club.jpg", title: "Fight Club" },
-        { image: "movie/the-revenant.jpg", title: "The Revenant" },
-        { image: "movie/bad-boys.jpg", title: "Bad Boys" },
-        { image: "movie/joker.jpg", title: "Joker" },
+        {
+          image: "movie/den.jpg",
+          name: "den of thieves",
+          category: "action",
+          description: "Professional thieves face fierce cops",
+        },
+        {
+          image: "movie/fight-club.jpg",
+          name: "fight club",
+          category: "drama",
+          description: "A secret club changes everything",
+        },
+        {
+          image: "movie/the-revenant.jpg",
+          name: "The revenant",
+          category: "drama",
+          description: "A survival battle in wilderness",
+        },
+        {
+          image: "movie/bad-boys.jpg",
+          name: "Bad Boys",
+          category: "comedy",
+          description: "Rebels cops take on crime",
+        },
+        {
+          image: "movie/joker.jpg",
+          name: "joker",
+          category: "crime",
+          description: "Joker unleashes chaos in Gotham",
+        },
       ],
     };
   },
@@ -138,6 +140,7 @@ export default {
   aspect-ratio: 32/45;
   /* aspect-ratio: 3/4; */
   border-radius: 8px;
+  perspective: 1000px;
   /* border-radius: 14px; */
   /* border: 1px solid rgba(177, 177, 177, 0.4); */
 }
@@ -151,7 +154,106 @@ export default {
   user-select: none;
 }
 
-.title {
+.swiper .swiper-slide .info {
+  /* opacity: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 30px;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(50%) translateZ(30px) scale(1.4); */
+  transform: translateZ(30px) scale(1.4);
+  /* transition: all 0.4s ease-in; */
+}
+
+/* .swiper .swiper-slide-active .info {
+  opacity: 1;
+  transform: translateY(-70%) translateZ(30px) scale(1.4);
+} */
+
+.info .text {
+  position: relative;
+}
+
+.info .name,
+.info .category {
+  text-transform: uppercase;
+}
+
+.info .name,
+.info .category,
+.info .description {
+  transform: translateY(100%);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.info .name {
+  margin-bottom: 0.2rem;
+  font-weight: 300;
+  /* transition-delay: 0.1s; */
+}
+.info .category {
+  margin-bottom: 1.1rem;
+  margin-left: 30px;
+  font-weight: 500;
+  /* transition-delay: 0.2s; */
+}
+
+.info .description {
+  font-size: 13px;
+  /* transition-delay: 0.3s; */
+}
+
+.swiper-slide-active .info .name {
+  transition-delay: 0.5s;
+}
+
+.swiper-slide-active .info .category {
+  transition-delay: 0.7s;
+}
+
+.swiper-slide-active .info .description {
+  transition-delay: 0.8s;
+}
+
+.swiper-slide-active .info .name,
+.swiper-slide-active .info .category,
+.swiper-slide-active .info .description {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.info .category::after {
+  bottom: 0;
+  width: 43px;
+  height: 1px;
+}
+
+.info .category::before {
+  top: 50%;
+  width: 15px;
+  height: 4px;
+}
+
+.info .category::before,
+.info .category::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  left: 0%;
+}
+.info .category::before {
+  transform: translate(-28px, 5px);
+}
+.info .category::after {
+  transform: translate(-28px, 8px);
+}
+
+/* .title {
   opacity: 0;
   position: absolute;
   bottom: 5px;
@@ -180,7 +282,7 @@ export default {
   opacity: 1;
   bottom: -10px;
   box-shadow: 0 20px 30px 2px rgba(25, 43, 206, 0.6);
-}
+} */
 
 .swiper-pagination {
   --swiper-pagination-bottom: 6px;
