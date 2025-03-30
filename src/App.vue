@@ -1,12 +1,16 @@
 <template>
   <the-header></the-header>
+  <home-movies></home-movies>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
+import HomeMovies from "./components/home/HomeMovies.vue";
+
 export default {
   components: {
     TheHeader,
+    HomeMovies,
   },
 };
 </script>
@@ -21,12 +25,15 @@ body {
 }
 
 .container-fluid {
-  margin-right: 2.5rem;
-  margin-left: 2.5rem;
+  /* margin-right: 2.5rem;
+  margin-left: 2.5rem; */
+  padding-right: 3.3rem;
+  padding-left: 3.3rem;
 }
 
 .responsive-text {
   font-size: calc(16px + 1vw);
+  /* font-size: clamp(16px, 1vw + 1rem, 30px); */
 }
 
 .light-pink-color {

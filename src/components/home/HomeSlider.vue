@@ -1,395 +1,318 @@
 <template>
-  <div class="container-fluid px-0 m-0">
-    <div
-      id="testimonialCarousel"
-      ref="carousel"
-      :class="{ slide: isSmallScreen }"
-      class="carousel"
-    >
-      <div class="carousel-inner" ref="carouselInner">
-        <div
-          class="carousel-item"
-          v-for="(data, index) in moviesWeek"
-          :key="index"
-          :class="{ active: index === getActiveItemIndex }"
-        >
-          <home-card :movie="data"></home-card>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div
+              class="swiper-slide"
+              v-for="(slide, index) in slides"
+              :key="index"
+            >
+              <div class="overlay"></div>
+              <img :src="slide.image" :alt="slide.name" />
+              <div class="info">
+                <h2 class="text name">{{ slide.name }}</h2>
+                <h4 class="text category">{{ slide.category }}</h4>
+                <p class="text description">{{ slide.description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
         </div>
       </div>
-      <button class="carousel-control-prev" @click="scrollPrev">
-        <span>
-          <i class="fa-solid fa-angle-left fa-lg"></i>
-        </span>
-      </button>
-      <button class="carousel-control-next" @click="scrollNext">
-        <span> <i class="fa-solid fa-angle-right fa-lg"></i> </span>
-      </button>
     </div>
   </div>
 </template>
 
 <script>
-import HomeCard from "./HomeCard.vue";
+import Swiper from "swiper";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+// import "swiper/css/pagination";
+import "swiper/css/navigation"; // استيراد تنسيق أزرار التنقل
+// import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { EffectCoverflow, Navigation } from "swiper/modules";
 
 export default {
-  components: {
-    HomeCard,
-  },
   data() {
     return {
-      moviesWeek: [
+      swiper: null,
+      slides: [
         {
-          image: "/movie/fight-club.jpg",
+          image: "movie/den.jpg",
+          name: "den of thieves",
+          category: "action",
+          description: "Professional thieves face fierce cops",
         },
         {
-          image: "/movie/bad-boys.jpg",
+          image: "movie/fight-club.jpg",
+          name: "fight club",
+          category: "drama",
+          description: "A secret club changes everything",
         },
         {
-          image: "/movie/kraven.jpg",
+          image: "movie/the-revenant.jpg",
+          name: "The revenant",
+          category: "drama",
+          description: "A survival battle in wilderness",
         },
         {
-          image: "/movie/den.jpg",
+          image: "movie/bad-boys.jpg",
+          name: "Bad Boys",
+          category: "comedy",
+          description: "Rebels cops take on crime",
         },
         {
-          image: "/movie/the-revenant.jpg",
+          image: "movie/joker.jpg",
+          name: "joker",
+          category: "crime",
+          description: "Joker unleashes chaos in Gotham",
         },
       ],
-      scrollPosition: 0,
-      cardWidth: 0,
-      carouselWidth: 0,
-      isSmallScreen: false,
-      activeItemIndex: 0,
-      numOfCardsShown: 0,
-      numOfClicksNext: 0,
     };
   },
   mounted() {
-    this.checkScreenSize();
-    window.addEventListener("resize", this.checkScreenSize);
-
-    this.$nextTick(() => {
-      const carouselInner = this.$refs.carouselInner;
-      const carouselItems = carouselInner.children;
-
-      // this.numOfClicksNext = Math.floor((this.moviesWeek.length - 3) / 2) + 1;
-
-      let moviesWeekLength = (this.moviesWeek.length - 3) / 2;
-      this.numOfClicksNext =
-        moviesWeekLength % 1 !== 0
-          ? Math.floor(moviesWeekLength) + 1
-          : moviesWeekLength;
-
-      if (carouselItems.length > 0) {
-        // offsetWidth يعطينا العرض الفعلي (بالبكسل) لهذا العنصر، بما في ذلك الـ padding والـ border، لكنه لا يشمل الـ margin.
-        this.cardWidth = carouselItems[0].offsetWidth;
-
-        // console.log(this.cardWidth);
-
-        // console.log(Math.floor(carouselItems.length / 2 - 1) * 450);
-        // console.log("scrollPosition ", this.scrollPosition);
-
-        /*
-        scrollWidth يعطينا العرض الكامل القابل للتمرير (scrollable width) داخل carouselInner.
-        أي إجمالي عرض جميع العناصر الموجودة داخل الكاروُسل، حتى لو لم تكن كلها مرئية على الشاشة في نفس الوقت.
-        */
-        this.carouselWidth = carouselInner.scrollWidth;
-
-        this.scrollPosition =
-          Math.floor(carouselItems.length / 2 - 1) * this.cardWidth;
-
-        let value = carouselItems.length / 2;
-        this.activeItemIndex = value % 1 !== 0 ? Math.ceil(value) : value + 1;
-
-        // console.log("card offsetWidth ", carouselItems[0].offsetWidth);
-        // console.log("scrollWidth ", carouselInner.scrollWidth);
-
-        this.$refs.carouselInner.scrollTo({
-          left: this.scrollPosition,
-        });
-      }
+    this.swiper = new Swiper(".swiper", {
+      //   modules: [EffectCoverflow, Pagination, Navigation],
+      modules: [EffectCoverflow, Navigation],
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      initialSlide: 2,
+      speed: 600,
+      preventClicks: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 80,
+        depth: 350,
+        modifier: 1,
+        slideShadows: true,
+      },
+      //   pagination: {
+      //     el: ".swiper-pagination",
+      //   },
+      navigation: {
+        nextEl: ".swiper-button-next", // تفعيل زر التالي
+        prevEl: ".swiper-button-prev", // تفعيل زر السابق
+      },
+      on: {
+        click: (event) => {
+          this.swiper.slideTo(this.swiper.clickedIndex);
+          console.log(event);
+        },
+      },
     });
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
-  computed: {
-    getActiveItemIndex() {
-      return this.activeItemIndex - 1;
-    },
-  },
-  methods: {
-    checkScreenSize() {
-      this.isSmallScreen = window.matchMedia("(max-width: 575px)").matches;
-      let mobileSize = window.matchMedia("(max-width: 575px)").matches;
-      // let tabletSize = window.matchMedia("(min-width: 576px)").matches;
-      let labSize = window.matchMedia("(min-width: 768px)").matches;
-
-      this.numOfCardsShown = mobileSize ? 1 : labSize ? 5 : 2;
-      // console.log(this.numOfCardsShown);
-    },
-    scrollNext() {
-      // this.scrollPosition <
-      //   this.carouselWidth - this.cardWidth * this.numOfCardsShown
-      if (
-        this.numOfClicksNext <
-        this.moviesWeek.length - this.numOfCardsShown
-      ) {
-        this.scrollPosition += this.cardWidth;
-
-        // console.log("scrollPosition  scrollNext  " + this.scrollPosition);
-
-        this.$refs.carouselInner.scrollTo({
-          left: this.scrollPosition,
-          behavior: "smooth",
-        });
-
-        this.activeItemIndex++;
-        this.numOfClicksNext++;
-        // console.log("scrollNext  " + this.numOfClicksNext);
-      }
-    },
-    scrollPrev() {
-      // this.scrollPosition > 0
-      if (this.numOfClicksNext > 0) {
-        this.scrollPosition -= this.cardWidth;
-        // console.log("scrollPosition  scrollPrev  " + this.scrollPosition);
-
-        this.$refs.carouselInner.scrollTo({
-          left: this.scrollPosition,
-          behavior: "smooth",
-        });
-
-        this.activeItemIndex--;
-        this.numOfClicksNext--;
-        // console.log("scrollPrev  " + this.numOfClicksNext);
-      }
-    },
   },
 };
 </script>
 
 <style scoped>
-#testimonialCarousel .carousel-inner {
-  /* height: 350px; */
-  overflow: hidden;
-  align-items: center;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* .carousel-inner {
-  padding: 1em;
-} */
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 34px;
-  height: 34px;
-  background-color: gray;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15),
-    -1px -1px 10px rgba(0, 0, 0, 0.15);
+.swiper {
+  width: 100%;
+  /* padding: 50px 0; */
 }
 
-.carousel-control-next,
-.carousel-control-prev {
-  opacity: 0.5;
-  color: #ffffff;
-}
-
-.carousel-control-next:hover,
-.carousel-control-prev:hover {
-  color: #ffffff;
-  opacity: inherit;
-}
-
-.carousel-control-next {
-  right: 10px;
-}
-
-.carousel-control-prev {
-  left: 10px;
-}
-
-/* .carousel-item.active {
-  position: relative;
-} */
-
-.carousel-item {
-  position: static;
-}
-
-.carousel-item.active .card-movie {
-  /* transform: scale(1.1) translateY(-13px); */
-  /* margin: 0 25px; */
-  z-index: 2;
+.overlay {
+  /* background-color: rgba(90, 104, 144, 0.5); */
+  background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  /* width: 100%; */
-  width: 22%;
-  transform: translate(-68%, -50%) scale(1.1);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  /* border-radius: 14px; */
+}
+
+/* div.swiper-wrapper {
+  cursor: pointer !important;
+} */
+
+.swiper-slide {
+  position: relative;
+  /* height: 450px; */
+  width: 320px;
+  aspect-ratio: 32/45;
+  /* aspect-ratio: 3/4; */
+  border-radius: 8px;
+  perspective: 1000px;
+  /* border-radius: 14px; */
+  /* border: 1px solid rgba(177, 177, 177, 0.4); */
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  user-select: none;
+}
+
+.swiper .swiper-slide .info {
+  /* opacity: 0; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 30px;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(50%) translateZ(30px) scale(1.4); */
+  transform: translateZ(30px) scale(1.4);
+  /* transition: all 0.4s ease-in; */
+}
+
+/* .swiper .swiper-slide-active .info {
+  opacity: 1;
+  transform: translateY(-70%) translateZ(30px) scale(1.4);
+} */
+
+.info .text {
+  position: relative;
+}
+
+.info .name,
+.info .category {
+  text-transform: uppercase;
+}
+
+.info .name,
+.info .category,
+.info .description {
+  transform: translateY(100%);
   transition: all 0.5s ease;
+  opacity: 0;
 }
 
-@media screen and (min-width: 576px) {
-  .carousel-inner {
-    display: flex;
-    /* width: 90%; */
-    width: 100%;
-    margin-inline: auto;
-    padding: 1em 0;
-    overflow: hidden;
-  }
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    flex: 0 0 calc(100% / 2);
+.info .name {
+  margin-bottom: 0.2rem;
+  font-weight: 300;
+  /* transition-delay: 0.1s; */
+}
+.info .category {
+  margin-bottom: 1.1rem;
+  margin-left: 30px;
+  font-weight: 500;
+  /* transition-delay: 0.2s; */
+}
+
+.info .description {
+  font-size: 13px;
+  /* transition-delay: 0.3s; */
+}
+
+.swiper-slide-active .info .name {
+  transition-delay: 0.5s;
+}
+
+.swiper-slide-active .info .category {
+  transition-delay: 0.7s;
+}
+
+.swiper-slide-active .info .description {
+  transition-delay: 0.8s;
+}
+
+.swiper-slide-active .info .name,
+.swiper-slide-active .info .category,
+.swiper-slide-active .info .description {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.info .category::after {
+  bottom: 0;
+  width: 43px;
+  height: 1px;
+}
+
+.info .category::before {
+  top: 50%;
+  width: 15px;
+  height: 4px;
+}
+
+.info .category::before,
+.info .category::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  left: 0%;
+}
+.info .category::before {
+  transform: translate(-28px, 5px);
+}
+.info .category::after {
+  transform: translate(-28px, 8px);
+}
+
+.swiper-pagination {
+  --swiper-pagination-bottom: 6px;
+}
+
+.swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.swiper-pagination-bullet-active {
+  width: 32px;
+  background-color: rgba(25, 43, 206, 1);
+  border-radius: 14px;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 27px;
+  color: #ffffff;
+}
+
+/* .swiper-button-prev {
+  left: 65px;
+}
+
+.swiper-button-next {
+  right: 65px;
+} */
+
+@media (max-width: 1100px) {
+  .swiper-slide {
+    width: 300px;
   }
 }
 
-@media screen and (min-width: 768px) {
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    /* flex: 0 0 calc(99% / 3); */
-    flex: 0 0 calc(100% / 5);
-    /* flex: 0 0 450px; */
+@media (max-width: 900px) {
+  .swiper-slide {
+    width: 250px;
   }
 }
 
-@media screen and (max-width: 851px) {
-  .carousel-item.active .card {
-    transform: scale(1) translateY(0);
-    margin: 0 0.5em;
+@media (max-width: 700px) {
+  .swiper-slide {
+    width: 230px;
   }
 }
 
-@media (max-width: 575px) {
-  .carousel-inner {
-    display: flex;
-    /* width: 90%; */
-    width: 90%;
-    margin-inline: auto;
-    padding: 1em 0;
-    /* overflow: hidden; */
-  }
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    flex: 0 0 100%;
-    /* flex: 0 0 450px; */
-  }
-  .carousel-control-next {
-    right: 7px;
-  }
-
-  .carousel-control-prev {
-    left: 7px;
+@media (max-width: 610px) {
+  .swiper-slide {
+    width: 200px;
   }
 }
 </style>
-
-<!-- <style scoped>
-#testimonialCarousel .carousel-inner {
-  height: 350px;
-  overflow: hidden;
-  align-items: center;
-}
-
-.carousel-inner {
-  padding: 1em;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 34px;
-  height: 34px;
-  background-color: gray;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15),
-    -1px -1px 10px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-control-next,
-.carousel-control-prev {
-  opacity: 0.5;
-  color: #ffffff;
-}
-
-.carousel-control-next:hover,
-.carousel-control-prev:hover {
-  color: #ffffff;
-  opacity: inherit;
-}
-
-.carousel-control-next {
-  right: 10px;
-}
-
-.carousel-control-prev {
-  left: 10px;
-}
-
-.carousel-item.active .card {
-  transform: scale(1.1) translateY(-13px);
-  margin: 0 25px;
-}
-
-@media screen and (min-width: 576px) {
-  .carousel-inner {
-    display: flex;
-    width: 90%;
-    /* width: 100%; */
-    margin-inline: auto;
-    padding: 1em 0;
-    overflow: hidden;
-  }
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    flex: 0 0 calc(100% / 2);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    /* flex: 0 0 calc(99% / 3); */
-    flex: 0 0 calc(100% / 3);
-    /* flex: 0 0 450px; */
-  }
-}
-
-@media screen and (max-width: 851px) {
-  .carousel-item.active .card {
-    transform: scale(1) translateY(0);
-    margin: 0 0.5em;
-  }
-}
-
-@media (max-width: 575px) {
-  .carousel-inner {
-    display: flex;
-    /* width: 90%; */
-    width: 90%;
-    margin-inline: auto;
-    padding: 1em 0;
-    /* overflow: hidden; */
-  }
-  .carousel-item {
-    display: block;
-    margin-right: 0;
-    flex: 0 0 100%;
-    /* flex: 0 0 450px; */
-  }
-  .carousel-control-next {
-    right: 7px;
-  }
-
-  .carousel-control-prev {
-    left: 7px;
-  }
-}
-</style> -->

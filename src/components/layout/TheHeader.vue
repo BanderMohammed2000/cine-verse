@@ -1,5 +1,5 @@
 <template>
-  <header id="header">
+  <header id="header" class="pb-5">
     <div class="overlay"></div>
     <div class="header-background"></div>
     <nav class="navbar navbar-expand-lg">
@@ -40,9 +40,12 @@
             </li>
           </ul>
           <form>
-            <button class="btn btn-login light-pink-background">
+            <!-- <button class="btn btn-login light-pink-background">
               Login or Register
-            </button>
+            </button> -->
+            <base-button class="light-pink-background"
+              >Login or Register</base-button
+            >
           </form>
         </div>
       </div>
@@ -57,18 +60,18 @@
         </div>
       </div>
     </div>
-    <!-- <home-slider></home-slider> -->
-    <effect-slider></effect-slider>
+    <home-slider></home-slider>
+    <!-- <home-movies></home-movies> -->
   </header>
 </template>
 
 <script>
 import HomeSlider from "../home/HomeSlider.vue";
-import EffectSlider from "../home/EffectSlider.vue";
+// import HomeMovies from "../home/HomeMovies.vue";
 export default {
   components: {
     HomeSlider,
-    EffectSlider,
+    // HomeMovies,
   },
 };
 </script>
@@ -87,8 +90,8 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-  z-index: -1;
-  filter: blur(3px);
+  z-index: -2;
+  /* filter: blur(3px); */
   /* filter: blur(5px); */
 }
 .overlay {
@@ -100,6 +103,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 /*navbar*/
@@ -122,18 +126,6 @@ export default {
 
 .navbar-nav .nav-item .nav-link:hover {
   opacity: 1;
-}
-
-.navbar form .btn-login {
-  color: #ffffff;
-  font-weight: 500;
-  padding: 0.5rem 1.5rem;
-  border-radius: 50px;
-  transition: all 0.3s ease-in;
-}
-
-.navbar form .btn-login:hover {
-  background-color: #d1535e;
 }
 
 /*navbar*/
