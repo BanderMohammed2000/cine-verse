@@ -1,21 +1,44 @@
 <template>
   <section id="discover">
     <div class="container-fluid py-4">
-      <div class="row mb-5">
-        <div class="col-md-4">
+      <div class="row mb-5 mb-md-4 mb-lg-5">
+        <div class="col-lg-4 col-md-12 col-sm-6">
           <h4 class="movie-title">
             Discover <span class="light-pink-color">Movies</span>
           </h4>
         </div>
-        <div class="col-md-4">
-          <div class="btn-container">
-            <base-button class="outline active">Random</base-button>
-            <base-button class="outline">Popular</base-button>
-            <base-button class="outline">Recent</base-button>
+        <div
+          class="col-lg-4 col-md-6 col-sm-12 mt-3 mt-lg-0 order-1 order-md-0"
+        >
+          <div :class="['btn-container', buttonClicked]">
+            <div class="row">
+              <div class="col col-sm-3 col-md-4">
+                <base-button
+                  :class="['outline', { active: buttonClicked == 'random' }]"
+                  @click="moveHorizontalLine('random')"
+                  >Random</base-button
+                >
+              </div>
+              <div class="col col-sm-3 col-md-4">
+                <base-button
+                  :class="['outline', { active: buttonClicked == 'popular' }]"
+                  @click="moveHorizontalLine('popular')"
+                  >Popular</base-button
+                >
+              </div>
+              <div class="col col-sm-3 col-md-4">
+                <base-button
+                  :class="['outline', { active: buttonClicked == 'recent' }]"
+                  @click="moveHorizontalLine('recent')"
+                  >Recent</base-button
+                >
+              </div>
+            </div>
           </div>
+          <!-- <div class="horizontal-line"></div> -->
         </div>
-        <div class="col-md-4">
-          <form @submit.prevent class="d-flex justify-content-end">
+        <div class="col-lg-4 col-md-6 col-sm-6 mt-3 mt-sm-1 mt-md-3 mt-lg-0">
+          <form @submit.prevent class="d-flex justify-content-sm-end">
             <div>
               <span><i class="fa-solid fa-magnifying-glass"></i></span>
               <input
@@ -50,6 +73,7 @@
 <script>
 import BaseButton from "../ui/BaseButton.vue";
 import MovieCard from "./MovieCard.vue";
+
 export default {
   components: {
     MovieCard,
@@ -57,6 +81,7 @@ export default {
   },
   data() {
     return {
+      buttonClicked: "random",
       movies: [
         {
           name: "Bad Boys",
@@ -103,6 +128,12 @@ export default {
       ],
     };
   },
+
+  methods: {
+    moveHorizontalLine(value) {
+      this.buttonClicked = value;
+    },
+  },
 };
 </script>
 
@@ -115,9 +146,10 @@ section#discover {
   /* font-size: calc(10px + 1vw); */
 }
 .btn-container {
-  display: flex;
-  justify-content: space-around;
+  /* display: flex;
+  justify-content: space-around; */
   margin: 0 10px;
+  position: relative;
 }
 .btn-container .outline.active {
   opacity: 1;
@@ -126,13 +158,38 @@ section#discover {
 .btn-container .outline:not(.active) {
   opacity: 0.7;
 }
+.btn-container::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #e2606a;
+  bottom: -11px;
+  transition: all 0.3s ease;
+  /* left: 35%; */
+  /* left: 70%; */
+}
+
+.btn-container.random::after {
+  left: 0;
+}
+
+.btn-container.popular::after {
+  left: 35%;
+}
+
+.btn-container.recent::after {
+  left: 70%;
+}
+
 form {
   position: relative;
   transform: translateY(-7px);
 }
 form > div {
   display: flex;
-  width: 60%;
+  /* width: 60%; */
   position: relative;
 }
 form > div > span {
@@ -144,7 +201,7 @@ form > div > span {
   transform: translateY(-50%);
 }
 input.search {
-  font-size: 15px;
+  font-size: 14px;
   background-color: transparent;
   color: #ffffff;
   outline: none;
@@ -161,5 +218,21 @@ input.search::placeholder {
   color: #ffffff;
   opacity: 0.7;
   /* text-align: end; */
+}
+
+@media (max-width: 991.98px) {
+  .btn-container {
+    margin: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .btn-container.popular::after {
+    left: 25%;
+  }
+
+  .btn-container.recent::after {
+    left: 51%;
+  }
 }
 </style>

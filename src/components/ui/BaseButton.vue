@@ -27,6 +27,7 @@ button.outline {
   font-weight: normal;
   padding: 0;
   border: none;
+  border-radius: 0;
 }
 
 button.outline:hover {

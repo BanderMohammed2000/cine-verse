@@ -33,7 +33,7 @@
               <a class="nav-link" href="#">News</a>
             </li>
             <li class="nav-item ms-4">
-              <a class="nav-link" href="#">Discover</a>
+              <a class="nav-link" href="#discover">Discover</a>
             </li>
             <li class="nav-item ms-4">
               <a class="nav-link" href="#">Community</a>
