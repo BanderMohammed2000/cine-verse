@@ -2,18 +2,20 @@
   <the-header></the-header>
   <home-movies></home-movies>
   <home-news></home-news>
+  <the-footer></the-footer>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
 import HomeMovies from "./components/home/HomeMovies.vue";
 import HomeNews from "./components/home/HomeNews.vue";
-
+import TheFooter from "./components/layout/TheFooter.vue";
 export default {
   components: {
     TheHeader,
     HomeMovies,
     HomeNews,
+    TheFooter,
   },
 };
 </script>

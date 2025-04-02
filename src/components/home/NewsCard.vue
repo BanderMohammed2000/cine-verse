@@ -2,27 +2,27 @@
   <div v-if="!verticalCard" class="card horizontal mb-4">
     <div class="row g-0">
       <div class="col-md-6">
+        <!-- img -->
         <img
-          src="/movie/bad-boys.jpg"
+          :src="article.img"
           class="img-fluid rounded-start"
-          alt="..."
+          alt="movie image"
           loading="lazy"
         />
       </div>
       <div class="col-md-6">
         <div class="card-body pt-2 pt-md-0 ps-0 ps-md-3">
+          <!-- author and ago -->
           <div class="card-text ago mb-3">
-            2 Hours Ago - <span>by Yoga</span>
+            {{ article.ago }} - <span>by {{ article.author }}</span>
           </div>
-          <h5 class="card-title">"Bad Boys: Ride or Die" – Latest Updates</h5>
+          <h5 class="card-title">
+            <!-- title -->
+            {{ article.title }}
+          </h5>
           <p class="card-text">
-            The fourth installment of the Bad Boys franchise, Bad Boys: Ride or
-            Die, was released in June 2024 and became a massive box office
-            success, grossing over $404 million worldwide. Will Smith and Martin
-            Lawrence reprise their roles as detectives Mike Lowrey and Marcus
-            Burnett, facing a new high-stakes mission in Miami. The film
-            received positive audience feedback, boasting a 97% rating on Rotten
-            Tomatoes.
+            <!-- text -->
+            {{ article.text }}
           </p>
           <p class="card-text">
             <base-button
@@ -36,10 +36,14 @@
     </div>
   </div>
   <div v-else class="card vertical">
-    <img src="/movie/fight-club.jpg" class="card-img-top" alt="..." />
+    <img :src="article.img" class="card-img-top" alt="movie image" />
     <div class="card-body ps-0 pt-2 pb-3 pb-md-0">
-      <div class="card-text ago mb-1">2 Hours Ago - <span>by Yoga</span></div>
-      <h6 class="card-title">"Fight Club: Chaos, Identity, and Rebellion"</h6>
+      <div class="card-text ago mb-1">
+        {{ article.ago }} - <span>by {{ article.author }}</span>
+      </div>
+      <h6 class="card-title">
+        {{ article.title }}
+      </h6>
     </div>
   </div>
 </template>
@@ -49,6 +53,11 @@ export default {
   props: {
     verticalCard: {
       type: Boolean,
+      required: false,
+      default: false,
+    },
+    article: {
+      type: Object,
       required: false,
       default: false,
     },
@@ -75,6 +84,13 @@ export default {
   color: #19947b;
 }
 
+.card.horizontal .card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .card.horizontal .card-text {
   font-size: 14px;
   color: #ffffff;
@@ -93,12 +109,42 @@ export default {
   height: 170px;
 }
 
+/*لوضع القسمين نفس الحجم*/
+/* ملاحظة: لو كان في margin عناصر الابناء راح يتم احتسابه ضمن الطول !!!*/
+/* .card.horizontal > .row {
+  display: flex;
+  align-items: stretch;
+}
+.card.horizontal > .row > .col-md-6,
+.card.horizontal > .row > .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+.card.horizontal .col-md-6 img,
+.card.horizontal .col-md-6 .card {
+  flex: 1;
+} */
+
+/*النهاية*/
+
 @media (max-width: 767.98px) {
   .card.vertical img {
     height: 300px;
   }
   .card .card-title {
     line-height: 1.5;
+  }
+  .card {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .card {
+    width: 100%;
+    margin: 0;
   }
 }
 </style>

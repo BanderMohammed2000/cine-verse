@@ -1,6 +1,6 @@
 <template>
   <div class="col">
-    <h6>
+    <h6 class="mt-3">
       <slot></slot>
     </h6>
   </div>
@@ -43,20 +43,20 @@ h6::after {
 ul {
   list-style: none;
   padding: 0;
+  margin-bottom: 0;
 }
 ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+ul li:not(:last-child) {
   margin-bottom: 12px;
 }
 ul li .info {
   display: flex;
   align-items: center;
   margin-right: 15px;
-  /* -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; */
-  /* overflow: hidden; */
 }
 
 .info img {
