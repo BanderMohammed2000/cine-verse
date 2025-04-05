@@ -14,7 +14,8 @@
         <div class="card-body pt-2 pt-md-0 ps-0 ps-md-3">
           <!-- author and ago -->
           <div class="card-text ago mb-3">
-            {{ article.ago }} - <span>by {{ article.author }}</span>
+            {{ article.ago }} -
+            <span :title="article.author">by {{ article.author }}</span>
           </div>
           <h5 class="card-title">
             <!-- title -->
@@ -77,6 +78,7 @@ export default {
 
 .card.horizontal img {
   height: 300px;
+  /* max-height: 284px; */
   width: 100%;
 }
 
@@ -103,6 +105,12 @@ export default {
 .card .card-text.ago {
   font-size: 13px;
   color: #ffffff;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .card.vertical img {

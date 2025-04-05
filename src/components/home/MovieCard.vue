@@ -51,7 +51,7 @@ export default {
 .card .card-title {
   font-size: 15px;
   /* color: #205452; */
-  color: #2e6a70;
+  color: #19947b;
 }
 
 .card .card-text {

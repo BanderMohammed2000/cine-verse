@@ -200,9 +200,12 @@ section#news {
 }
 .news-section {
   /* padding: 43px 30px; */
-  padding: 30px;
+  padding: 30px 20px;
   background-color: #0c0f22;
   border-radius: 5px;
+}
+.carousel-item {
+  padding: 0 10px;
 }
 h5 {
   color: #ffffff;
@@ -234,4 +237,10 @@ h5 {
 }
 
 /*النهاية*/
+
+@media (max-width: 991.98px) {
+  .news-section {
+    padding: 30px 5px;
+  }
+}
 </style>
