@@ -2,7 +2,7 @@
   <header id="header" class="pb-5">
     <div class="overlay"></div>
     <div class="header-background"></div>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg pt-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
           ><div class="d-flex align-items-center">
@@ -27,10 +27,10 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item ms-4">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item ms-4">
-              <a class="nav-link" href="#">News</a>
+              <a class="nav-link" href="#news">News</a>
             </li>
             <li class="nav-item ms-4">
               <a class="nav-link" href="#discover">Discover</a>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </nav>
-    <div class="container mt-5 position-relative">
+    <div class="container title-header position-relative">
       <div class="row">
         <div class="col-12">
           <h1 class="text-center responsive-text mb-5">
@@ -107,6 +107,34 @@ export default {
 }
 
 /*navbar*/
+nav.navbar::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  bottom: -10px;
+  width: calc(100% - 106px);
+  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  opacity: 0.1;
+}
+
+.navbar-nav li:first-child {
+  position: relative;
+}
+
+.navbar-nav li:first-child::after {
+  content: "";
+  position: absolute;
+  bottom: -28px;
+  left: 7px;
+  height: 4px;
+  width: 49px;
+  border-radius: 5px;
+  background-color: #e2606a;
+}
+
 .navbar .navbar-brand,
 .navbar ul.navbar-nav li a {
   color: #ffffff;
@@ -132,5 +160,9 @@ export default {
 
 #header h1 {
   color: #ffffff;
+}
+
+#header .title-header {
+  margin-top: 4rem;
 }
 </style>

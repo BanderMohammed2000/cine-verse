@@ -35,11 +35,13 @@ footer {
   content: "";
   width: 70%;
   height: 1px;
-  background-color: #353535;
+  /* background-color: #353535; */
+  background-color: #ffffff;
+  opacity: 0.1;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  border-radius: 5px;
+  border-radius: 50%;
 }
 </style>

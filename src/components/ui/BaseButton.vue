@@ -15,12 +15,21 @@ button {
   font-weight: 500;
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
-  transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
 }
 
-button:hover {
-  background-color: #d1535e;
-  color: #ffffff;
+button:not(.outline):hover,
+button:not(.outline):active {
+  background-color: #b93c47 !important;
+  color: #ffffff !important;
+  box-shadow: none;
+  border-color: transparent !important;
+}
+
+button:not(.outline):focus {
+  background-color: #e2606a;
+  box-shadow: none;
+  color: #ffffff !important;
 }
 
 button.outline {
@@ -28,10 +37,6 @@ button.outline {
   padding: 0;
   border: none;
   border-radius: 0;
-}
-
-button.outline:hover {
-  background-color: transparent;
 }
 
 button.outline:focus {

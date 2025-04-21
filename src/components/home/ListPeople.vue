@@ -29,7 +29,8 @@ h6 {
   font-weight: normal;
   padding-bottom: 19px;
   /* border-bottom: 1px solid #686868; */
-  border-bottom: 1px solid #353535;
+  /* border-bottom: 1px solid #353535; */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 h6::after {
   content: "";
