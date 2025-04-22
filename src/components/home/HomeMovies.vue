@@ -294,8 +294,11 @@ export default {
   watch: {
     "$route.query": {
       handler() {
-        this.setFromQuery();
+        if (this.$route.path === "/") {
+          this.setFromQuery();
+        }
       },
+      immediate: true,
     },
   },
 

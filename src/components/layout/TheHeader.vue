@@ -43,9 +43,11 @@
             <!-- <button class="btn btn-login light-pink-background">
               Login or Register
             </button> -->
-            <base-button class="light-pink-background"
-              >Login or Register</base-button
-            >
+            <router-link to="/login">
+              <base-button class="light-pink-background"
+                >Login or Register</base-button
+              >
+            </router-link>
           </form>
         </div>
       </div>
@@ -73,6 +75,11 @@ export default {
     HomeSlider,
     // HomeMovies,
   },
+  // methods: {
+  //   goToLogin() {
+  //     this.$router.push("/login");
+  //   },
+  // },
 };
 </script>
 

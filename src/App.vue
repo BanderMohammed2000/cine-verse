@@ -1,18 +1,80 @@
-<template>
+<!-- <template>
   <the-header></the-header>
   <home-view></home-view>
   <the-footer></the-footer>
+</template> -->
+
+<template>
+  <the-header />
+
+  <!-- ✅ الخلفية: إما الصفحة السابقة أو الصفحة الرئيسية -->
+  <router-view v-slot="{ Component, route }">
+    <component
+      :is="getBackgroundComponent(route)"
+      v-if="route.path === '/login' || route.path === '/register'"
+    />
+    <!-- ✅ إذا لم يكن /login، نعرض الصفحة بشكل عادي -->
+    <component :is="Component" v-else />
+  </router-view>
+
+  <!-- ✅ نافذة تسجيل الدخول تظهر كـ modal -->
+  <!-- <login-view v-if="$route.path === '/login'" />
+  <register-view v-else-if="$route.path === '/register'"></register-view> -->
+
+  <!-- ✅ modal واحد فقط يعرض المطلوب -->
+  <!-- <auth-modal
+    v-if="$route.path === '/login' || $route.path === '/register'"
+    :key="$route.fullPath"
+  /> -->
+
+  <auth-modal />
+
+  <the-footer />
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheFooter from "./components/layout/TheFooter.vue";
 import HomeView from "./views/HomeView.vue";
+import AuthModal from "./components/auth/AuthModal.vue";
+// import LoginView from "./views/LoginView.vue";
+// import RegisterView from "./views/RegisterView.vue";
 export default {
   components: {
     TheHeader,
     HomeView,
     TheFooter,
+    AuthModal,
+    // LoginView,
+    // RegisterView,
+  },
+  methods: {
+    /**
+     * هذه الدالة تعيد الخلفية المناسبة:
+     * - إذا فيه meta.background (يعني جاء من صفحة ثانية) → نعرضها.
+     * - إذا لا → نعرض الصفحة الرئيسية.
+     */
+    // getBackgroundComponent(route) {
+    //   return (
+    //     route.meta.background?.matched?.[0]?.components?.default || HomeView
+    //   );
+    // },
+
+    getBackgroundComponent(route) {
+      const background = route.meta.background;
+      const component = background?.matched?.[0]?.components?.default;
+
+      // تحقق من اسم المكون (عن طريق اسم route) وتأكد أنه ليس Login أو Register
+      const routeName = background?.name;
+
+      console.log("routeName: ", routeName);
+
+      if (routeName === "Login" || routeName === "Register") {
+        return HomeView; // استخدم الصفحة الرئيسية كخلفية بديلة
+      }
+
+      return component || HomeView;
+    },
   },
 };
 </script>
@@ -39,7 +101,7 @@ body {
 }
 
 .light-pink-color {
-  color: #e2606a;
+  color: #e2606a !important;
 }
 
 .light-pink-background {
