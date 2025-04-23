@@ -63,8 +63,6 @@ export default {
       if (this.email === "" || !this.email.includes("@")) {
         this.errorMessage = "Please enter a valid email.";
         this.formIsValid = false;
-        console.log(this.email);
-
         return;
       } else if (this.password.length < 6) {
         this.errorMessage = "password (must be at least 6 characters long).";

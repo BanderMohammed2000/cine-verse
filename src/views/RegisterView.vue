@@ -7,9 +7,17 @@
         ><i class="fa-solid fa-xmark fa-lg"></i
       ></span>
     </div>
-    <form action="">
-      <base-input type="text" placeholder="Enter your name"></base-input>
-      <base-input type="email" placeholder="Enter your email"></base-input>
+    <form @submit.prevent="submitForm">
+      <base-input
+        type="text"
+        placeholder="Enter your name"
+        v-model.trim="name"
+      ></base-input>
+      <base-input
+        type="email"
+        placeholder="Enter your email"
+        v-model.trim="email"
+      ></base-input>
       <!-- <base-input
         v-for="passInput in 2"
         :key="passInput"
@@ -18,12 +26,25 @@
           passInput - 1 ? 'Confirm password' : 'Create password'
         }`"
       ></base-input> -->
-      <base-input
+      <!-- <base-input
         v-for="(label, index) in ['Create password', 'Confirm password']"
         :key="index"
         type="password"
         :placeholder="label"
-      ></base-input>
+      ></base-input> -->
+      <base-input
+        type="password"
+        placeholder="Create password"
+        v-model.trim="password"
+      />
+      <base-input
+        type="password"
+        placeholder="Confirm password"
+        v-model.trim="confirmPassword"
+      />
+      <p v-if="!formIsValid" class="error-message">
+        {{ this.errorMessage }}
+      </p>
       <base-button type="submit" class="light-pink-background"
         >Register</base-button
       >
@@ -38,7 +59,47 @@
 
 <script>
 export default {
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      formIsValid: true,
+      errorMessage: "",
+    };
+  },
   methods: {
+    submitForm() {
+      this.validateFields();
+      if (this.formIsValid) {
+        alert(
+          "This form is just for testing the register UI — no real login is implemented."
+        );
+      }
+    },
+    validateFields() {
+      if (!this.name.length) {
+        this.errorMessage = "Please enter your name.";
+        this.formIsValid = false;
+        return;
+      } else if (this.email === "" || !this.email.includes("@")) {
+        this.errorMessage = "Please enter a valid email.";
+        this.formIsValid = false;
+        return;
+      } else if (this.password.length < 6) {
+        this.errorMessage = "password (must be at least 6 characters long).";
+        this.formIsValid = false;
+        return;
+      } else if (this.password !== this.confirmPassword) {
+        this.errorMessage =
+          "Passwords do not match. Please make sure both fields are identical.";
+        this.formIsValid = false;
+        return;
+      }
+      this.errorMessage = "";
+      this.formIsValid = true;
+    },
     closeRegister() {
       const backgroundPath = this.$route.meta.background?.fullPath || "/";
       const route = backgroundPath === "/login" ? "/" : backgroundPath;
@@ -84,6 +145,11 @@ export default {
 
 button.outline {
   font-weight: 500;
+}
+
+.error-message {
+  font-size: 15px;
+  color: #dc3545;
 }
 
 @media (max-width: 450px) {
