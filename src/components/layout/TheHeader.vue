@@ -52,7 +52,7 @@
         </div>
       </div>
     </nav>
-    <div class="container title-header position-relative">
+    <div class="container-fluid title-header position-relative">
       <div class="row">
         <div class="col-12">
           <h1 class="text-center responsive-text mb-5">
@@ -167,6 +167,7 @@ nav.navbar::after {
 
 #header h1 {
   color: #ffffff;
+  line-height: 1.5;
 }
 
 #header .title-header {

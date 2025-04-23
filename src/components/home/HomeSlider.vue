@@ -315,4 +315,27 @@ export default {
     width: 200px;
   }
 }
+
+@media (max-width: 767.98px) {
+  .info .name {
+    font-size: 20px;
+  }
+  .info .category {
+    font-size: 18px;
+  }
+  .info .description {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: var(--swiper-navigation-sides-offset, -5px);
+  }
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    left: var(--swiper-navigation-sides-offset, -5px);
+  }
+}
 </style>
