@@ -7,13 +7,23 @@
         ><i class="fa-solid fa-xmark fa-lg"></i
       ></span>
     </div>
-    <form action="">
-      <base-input type="email" placeholder="Enter your email"></base-input>
+    <form @submit.prevent="submitForm">
+      <base-input
+        type="email"
+        placeholder="Enter your email"
+        v-model.trim="email"
+      ></base-input>
       <base-input
         type="password"
         placeholder="Enter your password"
+        v-model.trim="password"
       ></base-input>
-      <base-button class="light-pink-background">Login</base-button>
+      <p v-if="!formIsValid" class="error-message">
+        {{ this.errorMessage }}
+      </p>
+      <base-button type="submit" class="light-pink-background"
+        >Login</base-button
+      >
       <router-link to="/register">
         <base-button mode="outline" class="ms-4 light-pink-color"
           >Register</base-button
@@ -27,13 +37,43 @@
 import BaseInput from "../components/ui/BaseInput.vue";
 export default {
   components: { BaseInput },
+  data() {
+    return {
+      email: "",
+      password: "",
+      formIsValid: true,
+      errorMessage: "",
+    };
+  },
   methods: {
     // closeLogin() {
     //   const background = this.$route.meta.background;
     //   this.$router.push(background?.fullPath || "/");
     //   document.body.style.overflow = "";
     // },
+    submitForm() {
+      this.validateFields();
+      if (this.formIsValid) {
+        alert(
+          "This form is just for testing the login UI — no real login is implemented."
+        );
+      }
+    },
+    validateFields() {
+      if (this.email === "" || !this.email.includes("@")) {
+        this.errorMessage = "Please enter a valid email.";
+        this.formIsValid = false;
+        console.log(this.email);
 
+        return;
+      } else if (this.password.length < 6) {
+        this.errorMessage = "password (must be at least 6 characters long).";
+        this.formIsValid = false;
+        return;
+      }
+      this.errorMessage = "";
+      this.formIsValid = true;
+    },
     closeLogin() {
       const backgroundPath = this.$route.meta.background?.fullPath || "/";
       const route = backgroundPath === "/register" ? "/" : backgroundPath;
@@ -79,6 +119,11 @@ export default {
 
 button.outline {
   font-weight: 500;
+}
+
+.error-message {
+  font-size: 15px;
+  color: #dc3545;
 }
 
 @media (max-width: 450px) {

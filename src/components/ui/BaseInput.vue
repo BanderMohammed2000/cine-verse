@@ -1,11 +1,23 @@
 <template>
-  <input :type="type" class="form-control mb-4" :placeholder="placeholder" />
+  <input
+    :type="type"
+    class="form-control mb-4"
+    :placeholder="placeholder"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+    required
+  />
 </template>
 <script>
 export default {
   props: {
     type: String,
     placeholder: String,
+    modelValue: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
 };
 </script>

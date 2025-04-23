@@ -24,7 +24,9 @@
         type="password"
         :placeholder="label"
       ></base-input>
-      <base-button class="light-pink-background">Register</base-button>
+      <base-button type="submit" class="light-pink-background"
+        >Register</base-button
+      >
       <router-link to="/login">
         <base-button mode="outline" class="ms-4 light-pink-color"
           >Login</base-button
