@@ -130,6 +130,7 @@ export default {
       isLoading: false,
       currentPage: 1,
       errorMessage: "",
+      // changeQuery: false,
       // movies: [
       //   {
       //     name: "Bad Boys",
@@ -294,7 +295,19 @@ export default {
   watch: {
     "$route.query": {
       handler() {
-        if (this.$route.path === "/") {
+        // if (
+        //   (this.$route.path === "/" && !this.movies.length) ||
+        //   (this.$route.path === "/" &&
+        //     !this.$route.hash &&
+        //     !this.movies.length) ||
+        //   (Object.keys(this.$route.query).length && !this.$route.hash)
+        // ) {
+        //   this.setFromQuery();
+        // }
+        if (
+          (this.$route.path === "/" && !this.movies.length) ||
+          (Object.keys(this.$route.query).length && !this.$route.hash)
+        ) {
           this.setFromQuery();
         }
       },
@@ -319,6 +332,10 @@ export default {
   // },
 
   methods: {
+    // getRouteQueryFirst() {
+    //   return Object.keys(this.$route.query).length;
+    // },
+
     async setFromQuery() {
       this.isLoading = true;
       this.errorMessage = "";
@@ -419,6 +436,7 @@ export default {
 
     goToPage(pageNumber) {
       if (pageNumber < 1 || pageNumber > this.totalPages) return;
+      // this.changeQuery = true;
       this.$router.push({
         path: this.$route.path,
         query: {
@@ -433,6 +451,7 @@ export default {
     },
 
     async changeCategory(category) {
+      // this.changeQuery = true;
       this.$router.push({
         path: this.$route.path,
         query: {

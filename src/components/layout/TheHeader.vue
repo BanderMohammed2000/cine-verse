@@ -2,56 +2,7 @@
   <header id="header" class="pb-5">
     <div class="overlay"></div>
     <div class="header-background"></div>
-    <nav class="navbar navbar-expand-lg pt-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><div class="d-flex align-items-center">
-            <img class="logo" src="/logo/logo.png" alt="logo" />
-            <p class="mb-0 ms-1">CineVerse</p>
-          </div></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
-            <li class="nav-item ms-4">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item ms-4">
-              <a class="nav-link" href="#about">About</a>
-            </li>
-            <li class="nav-item ms-4">
-              <a class="nav-link" href="#news">News</a>
-            </li>
-            <li class="nav-item ms-4">
-              <a class="nav-link" href="#discover">Discover</a>
-            </li>
-            <li class="nav-item ms-4">
-              <a class="nav-link" href="#">Community</a>
-            </li>
-          </ul>
-          <form>
-            <!-- <button class="btn btn-login light-pink-background">
-              Login or Register
-            </button> -->
-            <router-link to="/login">
-              <base-button class="light-pink-background"
-                >Login or Register</base-button
-              >
-            </router-link>
-          </form>
-        </div>
-      </div>
-    </nav>
+    <the-navbar></the-navbar>
     <div class="container-fluid title-header position-relative">
       <div class="row">
         <div class="col-12">
@@ -63,23 +14,17 @@
       </div>
     </div>
     <home-slider></home-slider>
-    <!-- <home-movies></home-movies> -->
   </header>
 </template>
 
 <script>
 import HomeSlider from "../home/HomeSlider.vue";
-// import HomeMovies from "../home/HomeMovies.vue";
+import TheNavbar from "./TheNavbar.vue";
 export default {
   components: {
     HomeSlider,
-    // HomeMovies,
+    TheNavbar,
   },
-  // methods: {
-  //   goToLogin() {
-  //     this.$router.push("/login");
-  //   },
-  // },
 };
 </script>
 
@@ -112,58 +57,6 @@ export default {
   height: 100%;
   z-index: -1;
 }
-
-/*navbar*/
-nav.navbar::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  bottom: -10px;
-  width: calc(100% - 106px);
-  height: 1px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ffffff;
-  opacity: 0.1;
-}
-
-.navbar-nav li:first-child {
-  position: relative;
-}
-
-.navbar-nav li:first-child::after {
-  content: "";
-  position: absolute;
-  bottom: -28px;
-  left: 7px;
-  height: 4px;
-  width: 49px;
-  border-radius: 5px;
-  background-color: #e2606a;
-}
-
-.navbar .navbar-brand,
-.navbar ul.navbar-nav li a {
-  color: #ffffff;
-}
-
-.navbar .navbar-brand .logo {
-  width: 50px;
-}
-
-.navbar-nav .nav-item .nav-link {
-  opacity: 0.8;
-}
-
-.navbar-nav .nav-item .nav-link.active {
-  opacity: 1;
-}
-
-.navbar-nav .nav-item .nav-link:hover {
-  opacity: 1;
-}
-
-/*navbar*/
 
 #header h1 {
   color: #ffffff;

@@ -32,7 +32,7 @@
               <div class="video-1 media">
                 <h4>Bad <span class="light-pink-color">Boys 4</span></h4>
                 <div class="play-icon">
-                  <img src="/svg/play.png" alt="play-icon" />
+                  <img src="/icons/play.png" alt="play-icon" />
                 </div>
                 <video
                   muted
@@ -50,7 +50,7 @@
               <div class="video-2 media">
                 <h4>Gladiator <span class="light-pink-color">2</span></h4>
                 <div class="play-icon">
-                  <img src="/svg/play.png" alt="play-icon" />
+                  <img src="/icons/play.png" alt="play-icon" />
                 </div>
                 <video
                   muted
@@ -71,7 +71,7 @@
               <div class="video-3 media">
                 <h4>Deadpool <span class="light-pink-color">3</span></h4>
                 <div class="play-icon">
-                  <img src="/svg/play.png" alt="play-icon" />
+                  <img src="/icons/play.png" alt="play-icon" />
                 </div>
                 <video
                   muted

@@ -6,7 +6,7 @@
           <div class="col">
             <h5>Hall Of <span class="light-pink-color">Fame</span></h5>
           </div>
-          <div class="hall-of-fame">
+          <div class="hall-of-fame" id="reviewers">
             <list-people :people="reviewers">Top Reviewers</list-people>
             <list-people :people="fandom">Top Fandom</list-people>
           </div>
