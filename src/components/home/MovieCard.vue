@@ -56,6 +56,7 @@ export default {
 }
 .card div img {
   height: 370px;
+  width: 100%;
   border-radius: 6px;
 }
 

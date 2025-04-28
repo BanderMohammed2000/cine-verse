@@ -38,16 +38,17 @@
           <!-- <div class="horizontal-line"></div> -->
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6 mt-3 mt-sm-1 mt-md-3 mt-lg-0">
-          <form @submit.prevent class="d-flex justify-content-sm-end">
+          <div class="search-model d-flex justify-content-sm-end">
             <div>
               <span><i class="fa-solid fa-magnifying-glass"></i></span>
               <input
                 type="text"
                 class="search"
                 placeholder="Search something here ..."
+                v-model="searchQuery"
               />
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -55,12 +56,16 @@
           {{ errorMessage }}
         </div>
 
+        <div v-else-if="!movies.length && !isLoading" class="error-message">
+          لايوجد عنصر
+        </div>
+
         <template v-else>
           <!-- هنا تعرض الأفلام -->
           <div
             class="col-md-4 col-lg-3"
-            v-for="(movie, index) in movies"
-            :key="index"
+            v-for="movie in movies"
+            :key="movie.id"
           >
             <movie-card :movie="movie"></movie-card>
           </div>
@@ -116,6 +121,7 @@
 </template>
 
 <script>
+// import movies from "../../store/modules/movies";
 import BaseButton from "../ui/BaseButton.vue";
 import MovieCard from "./MovieCard.vue";
 import { mapGetters } from "vuex";
@@ -130,6 +136,7 @@ export default {
       isLoading: false,
       currentPage: 1,
       errorMessage: "",
+      searchQuery: "",
       // changeQuery: false,
       // movies: [
       //   {
@@ -262,9 +269,27 @@ export default {
 
   computed: {
     ...mapGetters("movies", ["allMovies", "getTotalPages"]),
+
+    // movies() {
+    //   return this.allMovies;
+    // },
+
     movies() {
-      return this.allMovies;
+      if (!this.searchQuery) {
+        // إذا مافي بحث، رجّع كل الأفلام
+        return this.allMovies;
+      }
+
+      // فلترة الأفلام بناءً على العنوان
+      return this.allMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
+
+    // moviesTitles() {
+    //   // return this.movies.map((movie) => movie.title);
+    //   return this.movies.filter((movie) => movie.title.includes("th"));
+    // },
     totalPages() {
       return this.getTotalPages;
     },
@@ -334,6 +359,19 @@ export default {
   methods: {
     // getRouteQueryFirst() {
     //   return Object.keys(this.$route.query).length;
+    // },
+    // async searchResults() {
+    //   // if (!e.target.value) {
+    //   //   return this.movies;
+    //   // } else {
+    //   //   return this.movies.filter((movie) =>
+    //   //     movie.title.includes(e.target.value)
+    //   //   );
+    //   // }
+    //   await this.movies;
+    //   console.log(this.movies);
+
+    //   return this.movies;
     // },
 
     async setFromQuery() {
@@ -496,22 +534,23 @@ export default {
       }
     },
 
-    async handleWithLoading(actionName) {
-      this.isLoading = true;
-      try {
-        await this.$store.dispatch(actionName);
-      } catch (error) {
-        console.error("حدث خطأ أثناء جلب البيانات:", error.message);
-      } finally {
-        this.isLoading = false;
-      }
-    },
+    // async handleWithLoading(actionName) {
+    //   this.isLoading = true;
+    //   try {
+    //     await this.$store.dispatch(actionName);
+    //   } catch (error) {
+    //     console.error("حدث خطأ أثناء جلب البيانات:", error.message);
+    //   } finally {
+    //     this.isLoading = false;
+    //   }
+    // },
 
     async loadMovies(page = 1) {
       this.isLoading = true;
       try {
         await this.$store.dispatch("movies/fetchPage", page);
       } catch (error) {
+        this.errorMessage = "حدث خطأ أثناء تحميل المحتوى.";
         console.error("حدث خطأ أثناء جلب البيانات:", error.message);
       } finally {
         this.isLoading = false;
@@ -617,16 +656,16 @@ section#discover {
   pointer-events: none;
 }
 
-form {
+.search-model {
   position: relative;
   transform: translateY(-7px);
 }
-form > div {
+.search-model > div {
   display: flex;
   /* width: 60%; */
   position: relative;
 }
-form > div > span {
+.search-model > div > span {
   position: absolute;
   color: #ffffff;
   opacity: 0.7;
