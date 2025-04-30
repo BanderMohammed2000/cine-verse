@@ -100,9 +100,27 @@ export default {
       this.errorMessage = "";
       this.formIsValid = true;
     },
+    // closeRegister() {
+    //   const backgroundPath = this.$route.meta.background?.fullPath || "/";
+    //   const route = backgroundPath === "/login" ? "/" : backgroundPath;
+    //   this.$router.push(route);
+    //   document.body.style.overflow = "";
+    // },
+
     closeRegister() {
       const backgroundPath = this.$route.meta.background?.fullPath || "/";
-      const route = backgroundPath === "/login" ? "/" : backgroundPath;
+      const history = this.$route.meta.historyStack || [];
+
+      let route = backgroundPath;
+
+      if (backgroundPath === "/login") {
+        // نحاول نرجع إلى صفحة قبل /login أو /register
+        const previous = history
+          .reverse()
+          .find((r) => r.fullPath !== "/login" && r.fullPath !== "/register");
+        route = previous?.fullPath || "/";
+      }
+
       this.$router.push(route);
       document.body.style.overflow = "";
     },

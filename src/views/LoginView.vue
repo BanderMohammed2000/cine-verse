@@ -72,9 +72,27 @@ export default {
       this.errorMessage = "";
       this.formIsValid = true;
     },
+    // closeLogin() {
+    //   const backgroundPath = this.$route.meta.background?.fullPath || "/";
+    //   const route = backgroundPath === "/register" ? "/" : backgroundPath;
+    //   this.$router.push(route);
+    //   document.body.style.overflow = "";
+    // },
+
     closeLogin() {
       const backgroundPath = this.$route.meta.background?.fullPath || "/";
-      const route = backgroundPath === "/register" ? "/" : backgroundPath;
+      const history = this.$route.meta.historyStack || [];
+
+      let route = backgroundPath;
+
+      if (backgroundPath === "/register") {
+        // نحاول نرجع إلى صفحة ما قبل /register
+        const previous = history
+          .reverse()
+          .find((r) => r.fullPath !== "/register" && r.fullPath !== "/login");
+        route = previous?.fullPath || "/";
+      }
+
       this.$router.push(route);
       document.body.style.overflow = "";
     },

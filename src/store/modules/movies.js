@@ -5,6 +5,7 @@ const state = () => ({
   discover: "popular",
   // currentPage: 1,
   totalPages: 1,
+  responseStatus: 0,
   // allResults: [],
   // currentIndex: 0,
   // perPage: 8,
@@ -23,6 +24,10 @@ const mutations = {
   // incrementPage(state) {
   //   state.currentPage += 1;
   // },
+  setResponseStatus(state, status) {
+    state.responseStatus = status;
+  },
+
   resetMovies(state) {
     state.movies = [];
   },
@@ -61,7 +66,10 @@ const actions = {
     );
 
     if (!response.ok) {
+      commit("setResponseStatus", response.status);
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      commit("setResponseStatus", response.status);
     }
 
     const data = await response.json();
@@ -103,6 +111,7 @@ const actions = {
 const getters = {
   allMovies: (state) => state.movies,
   getTotalPages: (state) => state.totalPages,
+  getResponseStatus: (state) => state.responseStatus,
 };
 
 export default {

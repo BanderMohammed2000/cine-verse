@@ -52,13 +52,24 @@
         </div>
       </div>
       <div class="row">
-        <div v-if="errorMessage" class="error-message">
-          {{ errorMessage }}
+        <div v-if="errorMessage" class="text-center">
+          <p class="error-message mb-0">
+            {{ errorMessage }}
+          </p>
+          <base-button
+            v-if="tryAgainBtn"
+            class="light-pink-background mt-4"
+            @click="setFromQuery"
+            >Try Again</base-button
+          >
         </div>
 
-        <div v-else-if="!movies.length && !isLoading" class="error-message">
-          لايوجد عنصر
-        </div>
+        <p
+          v-else-if="!movies.length && !isLoading"
+          class="error-message text-center"
+        >
+          No results found. Try adjusting your search.
+        </p>
 
         <template v-else>
           <!-- هنا تعرض الأفلام -->
@@ -136,6 +147,7 @@ export default {
       isLoading: false,
       currentPage: 1,
       errorMessage: "",
+      tryAgainBtn: false,
       searchQuery: "",
       // changeQuery: false,
       // movies: [
@@ -268,7 +280,11 @@ export default {
   // },
 
   computed: {
-    ...mapGetters("movies", ["allMovies", "getTotalPages"]),
+    ...mapGetters("movies", [
+      "allMovies",
+      "getTotalPages",
+      "getResponseStatus",
+    ]),
 
     // movies() {
     //   return this.allMovies;
@@ -293,6 +309,11 @@ export default {
     totalPages() {
       return this.getTotalPages;
     },
+
+    responseStatus() {
+      return this.getResponseStatus;
+    },
+
     paginatedPages() {
       const pages = [];
       const current = this.currentPage;
@@ -377,6 +398,7 @@ export default {
     async setFromQuery() {
       this.isLoading = true;
       this.errorMessage = "";
+      this.tryAgainBtn = false;
 
       try {
         const allowedCategories = ["popular", "top_rated", "now_playing"];
@@ -399,7 +421,9 @@ export default {
         }
 
         if (!category) {
-          this.errorMessage = "التصنيف غير موجود";
+          // this.errorMessage = "التصنيف غير موجود";
+          this.errorMessage =
+            "Sorry, we couldn't find any results for this category.";
           // console.log(!!!this.errorMessage);
 
           return;
@@ -449,16 +473,30 @@ export default {
         this.currentPage = pageNumber;
 
         await this.$store.dispatch("movies/reset", category);
-        await this.loadMovies(pageNumber);
-        const totalPages = this.totalPages;
-        console.log(totalPages);
 
-        if (pageNumber <= 0 || pageNumber > totalPages) {
-          this.errorMessage = "الصفحة غير موجودة";
+        await this.loadMovies(pageNumber);
+        // const success = await this.loadMovies(pageNumber);
+
+        const totalPages = this.totalPages;
+
+        console.log(totalPages);
+        // console.log(this.responseStatus);
+
+        // pageNumber <= 0 || !this.tryAgainBtn || pageNumber > totalPages
+
+        if (this.responseStatus === 400) {
+          this.errorMessage =
+            "Sorry, that page doesn't exist. Try a different one.";
+          this.tryAgainBtn = false;
+          // console.log("tryBtn: ", this.tryAgainBtn);
+
           return;
         }
       } catch (error) {
-        this.errorMessage = "حدث خطأ أثناء تحميل المحتوى.";
+        // this.errorMessage = "حدث خطأ أثناء تحميل المحتوى.";
+        this.errorMessage =
+          "Something went wrong while fetching the data. Please try again later.";
+        this.tryAgainBtn = true;
         console.error(error);
       } finally {
         this.isLoading = false;
@@ -550,8 +588,13 @@ export default {
       try {
         await this.$store.dispatch("movies/fetchPage", page);
       } catch (error) {
-        this.errorMessage = "حدث خطأ أثناء تحميل المحتوى.";
+        // this.errorMessage = "حدث خطأ أثناء تحميل المحتوى.";
+        this.errorMessage =
+          "Something went wrong while fetching the data. Please try again later.";
+        this.tryAgainBtn = true;
         console.error("حدث خطأ أثناء جلب البيانات:", error.message);
+        // console.log("h");
+        // return false;
       } finally {
         this.isLoading = false;
       }
@@ -612,6 +655,12 @@ section#discover {
 
 .btn-container.recent::after {
   left: 70%;
+}
+
+p.error-message {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #19947b;
 }
 
 .pagination button.dots {
