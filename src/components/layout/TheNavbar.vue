@@ -44,7 +44,9 @@
           class="navbar-nav ms-sm-auto me-4 mb-2 mb-lg-0 align-items-sm-center"
         >
           <li class="nav-item ms-lg-4">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link to="/home" class="nav-link active" aria-current="page"
+              >Home</router-link
+            >
           </li>
           <li class="nav-item ms-lg-4">
             <a class="nav-link" href="#about">About</a>

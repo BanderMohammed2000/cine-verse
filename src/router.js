@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "./views/HomeView.vue";
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
+import NotFound from "./views/NotFound.vue";
 
 const routes = [
+  { path: "/", redirect: "/home" },
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: HomeView,
   },
@@ -19,6 +21,7 @@ const routes = [
     name: "Register",
     component: RegisterView,
   },
+  { path: "/:notFound(.*)", name: "NotFound", component: NotFound },
 ];
 
 const router = createRouter({

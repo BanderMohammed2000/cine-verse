@@ -351,7 +351,7 @@ export default {
         //   this.setFromQuery();
         // }
         if (
-          (this.$route.path === "/" && !this.movies.length) ||
+          (this.$route.path === "/home" && !this.movies.length) ||
           (Object.keys(this.$route.query).length && !this.$route.hash)
         ) {
           this.setFromQuery();

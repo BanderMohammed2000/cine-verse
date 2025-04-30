@@ -5,31 +5,38 @@
 </template> -->
 
 <template>
-  <the-header />
+  <div v-if="$route.name === 'NotFound'">
+    <!-- ✅ صفحة 404 بدون هيدر وفوتر -->
+    <router-view />
+  </div>
 
-  <!-- ✅ الخلفية: إما الصفحة السابقة أو الصفحة الرئيسية -->
-  <router-view v-slot="{ Component, route }">
-    <component
-      :is="getBackgroundComponent(route)"
-      v-if="route.path === '/login' || route.path === '/register'"
-    />
-    <!-- ✅ إذا لم يكن /login، نعرض الصفحة بشكل عادي -->
-    <component :is="Component" v-else />
-  </router-view>
+  <div v-else>
+    <the-header />
 
-  <!-- ✅ نافذة تسجيل الدخول تظهر كـ modal -->
-  <!-- <login-view v-if="$route.path === '/login'" />
+    <!-- ✅ الخلفية: إما الصفحة السابقة أو الصفحة الرئيسية -->
+    <router-view v-slot="{ Component, route }">
+      <component
+        :is="getBackgroundComponent(route)"
+        v-if="route.path === '/login' || route.path === '/register'"
+      />
+      <!-- ✅ إذا لم يكن /login، نعرض الصفحة بشكل عادي -->
+      <component :is="Component" v-else />
+    </router-view>
+
+    <!-- ✅ نافذة تسجيل الدخول تظهر كـ modal -->
+    <!-- <login-view v-if="$route.path === '/login'" />
   <register-view v-else-if="$route.path === '/register'"></register-view> -->
 
-  <!-- ✅ modal واحد فقط يعرض المطلوب -->
-  <!-- <auth-modal
+    <!-- ✅ modal واحد فقط يعرض المطلوب -->
+    <!-- <auth-modal
     v-if="$route.path === '/login' || $route.path === '/register'"
     :key="$route.fullPath"
   /> -->
 
-  <auth-modal />
+    <auth-modal />
 
-  <the-footer />
+    <the-footer />
+  </div>
 </template>
 
 <script>
