@@ -612,7 +612,7 @@ section#discover {
   background-color: #0a0f23;
 }
 .movie-title {
-  color: #ffffff;
+  color: var(--secondary-color);
   /* font-size: calc(10px + 1vw); */
 }
 .btn-container {
@@ -623,14 +623,14 @@ section#discover {
 }
 .btn-container .outline.active {
   opacity: 1;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 .btn-container .outline:not(.active) {
   opacity: 0.7;
 }
 .btn-container .outline:hover {
   opacity: 1;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 .btn-container::after {
   content: "";
@@ -638,7 +638,7 @@ section#discover {
   width: 70px;
   height: 5px;
   border-radius: 5px;
-  background-color: #e2606a;
+  background-color: var(--main-color);
   bottom: -11px;
   transition: all 0.3s ease;
   /* left: 35%; */
@@ -660,7 +660,7 @@ section#discover {
 p.error-message {
   font-size: 17px;
   line-height: 1.7;
-  color: #19947b;
+  color: var(--dark-teal);
 }
 
 .pagination button.dots {
@@ -680,7 +680,7 @@ p.error-message {
 .pagination button {
   all: unset;
   padding: 6px 12px;
-  color: #19947b;
+  color: var(--dark-teal);
   /* border: 1px solid #ccc; */
   /* background-color: transparent; */
   cursor: pointer;
@@ -688,7 +688,7 @@ p.error-message {
 }
 
 .pagination button.active {
-  background-color: #e2606a;
+  background-color: var(--main-color);
   color: white;
   font-weight: bold;
 }
@@ -700,7 +700,7 @@ p.error-message {
 
 .pagination button.dots {
   background-color: transparent;
-  color: #19947b;
+  color: var(--dark-teal);
   border: none;
   pointer-events: none;
 }
@@ -716,7 +716,7 @@ p.error-message {
 }
 .search-model > div > span {
   position: absolute;
-  color: #ffffff;
+  color: var(--secondary-color);
   opacity: 0.7;
   left: 15px;
   top: 50%;
@@ -725,7 +725,7 @@ p.error-message {
 input.search {
   font-size: 14px;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--secondary-color);
   outline: none;
   border: 0;
   border-left: 1px solid #444444;
@@ -737,7 +737,7 @@ input.search {
 }
 
 input.search::placeholder {
-  color: #ffffff;
+  color: var(--secondary-color);
   opacity: 0.7;
   /* text-align: end; */
 }

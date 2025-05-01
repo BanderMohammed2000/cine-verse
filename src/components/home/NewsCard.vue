@@ -83,7 +83,7 @@ export default {
 }
 
 .card .card-title {
-  color: #19947b;
+  color: var(--dark-teal);
 }
 
 .card.horizontal .card-title {
@@ -95,7 +95,7 @@ export default {
 
 .card.horizontal .card-text {
   font-size: 14px;
-  color: #ffffff;
+  color: var(--secondary-color);
   display: -webkit-box;
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
@@ -104,7 +104,7 @@ export default {
 
 .card .card-text.ago {
   font-size: 13px;
-  color: #ffffff;
+  color: var(--secondary-color);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;

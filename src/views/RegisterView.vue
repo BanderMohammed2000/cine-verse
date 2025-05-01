@@ -138,7 +138,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   z-index: 101;
 }
 .form-model > div {
@@ -152,7 +152,7 @@ export default {
   width: 100px;
   height: 3px;
   border-radius: 5px;
-  background-color: #e2606a;
+  background-color: var(--main-color);
   bottom: -11px;
   left: 0;
 }

@@ -168,7 +168,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   margin-left: 30px;
-  color: #ffffff;
+  color: var(--secondary-color);
   position: absolute;
   top: 50%;
   /* transform: translateY(50%) translateZ(30px) scale(1.4); */
@@ -267,7 +267,7 @@ export default {
 .swiper-pagination-bullet {
   width: 14px;
   height: 14px;
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   border-radius: 50%;
   transition: all 0.3s ease-in-out;
 }
@@ -281,7 +281,7 @@ export default {
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 27px;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 
 /* .swiper-button-prev {

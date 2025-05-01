@@ -95,11 +95,11 @@ export default {
 .card .card-title {
   font-size: 15px;
   /* color: #205452; */
-  color: #19947b;
+  color: var(--dark-teal);
 }
 
 .card .card-text {
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 
 @media (max-width: 767.98px) {

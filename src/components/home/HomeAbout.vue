@@ -122,7 +122,7 @@ section#about {
 .card {
   border: 0;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 .card-body {
   /* padding-left: 0; */
@@ -157,10 +157,10 @@ section#about {
   cursor: pointer;
 }
 .video-1 video {
-  /* border: 1px solid #19947b; */
+  /* border: 1px solid var(--dark-teal); */
 }
 .media h4 {
-  color: #ffffff;
+  color: var(--secondary-color);
   margin: 0;
   position: absolute;
   font-weight: 700;

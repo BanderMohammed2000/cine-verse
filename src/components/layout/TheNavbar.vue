@@ -44,7 +44,10 @@
           class="navbar-nav ms-sm-auto me-4 mb-2 mb-lg-0 align-items-sm-center"
         >
           <li class="nav-item ms-lg-4">
-            <router-link to="/home" class="nav-link active" aria-current="page"
+            <router-link
+              to="/home?category=popular&page=1"
+              class="nav-link active"
+              aria-current="page"
               >Home</router-link
             >
           </li>
@@ -98,7 +101,7 @@ nav.navbar::after {
   height: 1px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   opacity: 0.1;
 }
 
@@ -114,12 +117,12 @@ nav.navbar::after {
   height: 4px;
   width: 49px;
   border-radius: 5px;
-  background-color: #e2606a;
+  background-color: var(--main-color);
 }
 
 .navbar .navbar-brand,
 .navbar ul.navbar-nav li a {
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 
 .navbar .navbar-brand .logo {
@@ -140,7 +143,7 @@ nav.navbar::after {
 
 button.navbar-toggler {
   position: relative;
-  color: #ffffff;
+  color: var(--secondary-color);
   background-color: #314b8c61;
   height: 41px;
   width: 45px;
@@ -153,7 +156,7 @@ button.navbar-toggler:focus {
 
 .x-icon {
   position: absolute;
-  color: #ffffff;
+  color: var(--secondary-color);
   left: 11px;
 }
 .x-icon span {
@@ -161,7 +164,7 @@ button.navbar-toggler:focus {
   width: 20px;
   height: 2px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
 }
 
 .x-icon span:first-child {

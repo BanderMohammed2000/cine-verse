@@ -208,14 +208,14 @@ section#news {
   padding: 0 10px;
 }
 h5 {
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 .title-section {
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 .prev,
 .next {
-  color: #ffffff;
+  color: var(--secondary-color);
   cursor: pointer;
 }
 

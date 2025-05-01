@@ -14,7 +14,7 @@ export default {
 
 <style scoped>
 button {
-  color: #ffffff;
+  color: var(--secondary-color);
   font-weight: 500;
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
@@ -24,15 +24,15 @@ button {
 button:not(.outline):hover,
 button:not(.outline):active {
   background-color: #b93c47 !important;
-  color: #ffffff !important;
+  color: var(--secondary-color) !important;
   box-shadow: none;
   border-color: transparent !important;
 }
 
 button:not(.outline):focus {
-  background-color: #e2606a;
+  background-color: var(--main-color);
   box-shadow: none;
-  color: #ffffff !important;
+  color: var(--secondary-color) !important;
 }
 
 button.outline {
@@ -51,6 +51,6 @@ button.outline:focus {
 button.outline:active {
   background-color: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
 </style>

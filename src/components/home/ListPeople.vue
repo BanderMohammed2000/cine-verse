@@ -39,7 +39,7 @@ h6::after {
   left: 0;
   width: 120px;
   height: 1px;
-  background-color: #e2606a;
+  background-color: var(--main-color);
 }
 ul {
   list-style: none;
@@ -78,8 +78,8 @@ ul li .info {
 }
 .points {
   font-size: 14px;
-  color: #19947b;
-  border: 1px solid #19947b;
+  color: var(--dark-teal);
+  border: 1px solid var(--dark-teal);
   padding: 1px 10px;
   border-radius: 50px;
 }

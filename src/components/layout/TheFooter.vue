@@ -28,7 +28,7 @@ footer {
   background-color: #0f152b;
 }
 .col {
-  color: #ffffff;
+  color: var(--secondary-color);
   position: relative;
 }
 .col::before {
@@ -36,7 +36,7 @@ footer {
   width: 70%;
   height: 1px;
   /* background-color: #353535; */
-  background-color: #ffffff;
+  background-color: var(--secondary-color);
   opacity: 0.1;
   position: absolute;
   top: 0;

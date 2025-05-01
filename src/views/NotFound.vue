@@ -23,15 +23,17 @@
   display: flex;
   align-items: center;
 }
+
 h1.status {
   font-size: 8rem;
-  color: #ffffff;
+  color: var(--secondary-color);
 }
+
 p {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.7;
-  color: #19947b;
+  color: var(--dark-teal);
 }
 
 @media (max-width: 575.98px) {

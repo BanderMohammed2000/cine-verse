@@ -26,7 +26,7 @@
 <style scoped>
 .container {
   --uib-size: 100px;
-  --uib-color: #e2606a;
+  --uib-color: var(--main-color);
   --uib-speed: 0.8s;
   --uib-bg-opacity: 0.1;
   height: var(--uib-size);

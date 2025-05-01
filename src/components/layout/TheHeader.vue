@@ -59,7 +59,7 @@ export default {
 }
 
 #header h1 {
-  color: #ffffff;
+  color: var(--secondary-color);
   line-height: 1.5;
 }
 
