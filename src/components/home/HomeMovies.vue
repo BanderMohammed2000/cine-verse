@@ -609,7 +609,8 @@ export default {
 
 <style scoped>
 section#discover {
-  background-color: #0a0f23;
+  /* background-color: #0a0f23; */
+  background-color: #121832;
 }
 .movie-title {
   color: var(--secondary-color);

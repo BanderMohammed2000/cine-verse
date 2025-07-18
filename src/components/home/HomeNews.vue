@@ -103,26 +103,26 @@ export default {
             Burnett, facing a new high-stakes mission in Miami. The film
             received positive audience feedback, boasting a 97% rating on Rotten
             Tomatoes.`,
-            img: "/movie/bad-boys.jpg",
+            img: "bad-boys.jpg",
             author: "Yoga",
             ago: "2 Hours Ago",
           },
           {
             title:
               '"Joker 2024: Chaos Returns in a Darker and More Thrilling Sequel!"',
-            img: "/movie/joker-news.webp",
+            img: "joker-news.webp",
             author: "Yoga",
             ago: "4 Hours Ago",
           },
           {
             title: '"Gladiator 2 (2024): The Epic Sequel Begins!"',
-            img: "/movie/gladiator.jpg",
+            img: "gladiator.jpg",
             author: "Bander",
             ago: "5 Hours Ago",
           },
           {
             title: '"Kraven the Hunter (2024): A Fierce New Antihero Rises!"',
-            img: "/movie/kraven.jpg",
+            img: "kraven.jpg",
             author: "Ahmed",
             ago: "6 Hours Ago",
           },
@@ -131,44 +131,44 @@ export default {
           {
             title: "The Beekeeper (2024): A High-Stakes Action Thriller",
             text: `Jason Statham returns to the big screen in The Beekeeper (2024), an intense action thriller that blends high-stakes espionage with brutal revenge. Directed by David Ayer, the film follows a former operative known as a "Beekeeper," a member of a covert organization, who embarks on a relentless mission of vengeance after a personal tragedy.`,
-            img: "/movie/beekeeper.jpg",
+            img: "beekeeper.jpg",
             author: "Mohammed",
             ago: "8 Hours Ago",
           },
           {
             title: '"Sunrise (2024): A Thrilling New Mystery Unfolds!"',
-            img: "/movie/sunrise.jpg",
+            img: "sunrise.jpg",
             author: "Fahed",
             ago: "9 Hours Ago",
           },
           {
             title:
               '"Deadpool & Wolverine (2024): The Merc with a Mouth Returns!"',
-            img: "/movie/deadpool.webp",
+            img: "deadpool.webp",
             author: "Ali",
             ago: "10 Hours Ago",
           },
           {
             title: '"Ride (2024): A High-Speed Thriller Unleashed!"',
-            img: "/movie/ride.jpg",
+            img: "ride.jpg",
             author: "Saleh",
             ago: "11 Hours Ago",
           },
         ],
       ],
       reviewers: [
-        { name: "Bader Ali", img: "/people/1.jpg", points: "2544" },
-        { name: "Nader Fahed", img: "/people/6.jpg", points: "2450" },
-        { name: "Ali Ahmed", img: "/people/3.png", points: "2300" },
-        { name: "Bander Mohammed", img: "/people/4.png", points: "2278" },
-        { name: "Faisal Salem", img: "/people/5.png", points: "2228" },
+        { name: "Bader Ali", img: "1.jpg", points: "2544" },
+        { name: "Nader Fahed", img: "6.jpg", points: "2450" },
+        { name: "Ali Ahmed", img: "3.png", points: "2300" },
+        { name: "Bander Mohammed", img: "4.png", points: "2278" },
+        { name: "Faisal Salem", img: "5.png", points: "2228" },
       ],
       fandom: [
-        { name: "Bader Ali", img: "/people/1.jpg", points: "2544" },
-        { name: "Nader Fahed", img: "/people/6.jpg", points: "2450" },
-        { name: "Ali Ahmed", img: "/people/3.png", points: "2300" },
-        { name: "Bander Mohammed", img: "/people/4.png", points: "2278" },
-        { name: "Faisal Salem", img: "/people/5.png", points: "2228" },
+        { name: "Bader Ali", img: "1.jpg", points: "2544" },
+        { name: "Nader Fahed", img: "6.jpg", points: "2450" },
+        { name: "Ali Ahmed", img: "3.png", points: "2300" },
+        { name: "Bander Mohammed", img: "4.png", points: "2278" },
+        { name: "Faisal Salem", img: "5.png", points: "2228" },
       ],
     };
   },
@@ -201,7 +201,8 @@ section#news {
 .news-section {
   /* padding: 43px 30px; */
   padding: 30px 20px;
-  background-color: #0c0f22;
+  /* background-color: #0c0f22; */
+  background-color: #121832;
   border-radius: 5px;
 }
 .carousel-item {

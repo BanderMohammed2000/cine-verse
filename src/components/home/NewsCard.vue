@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <!-- img -->
         <img
-          :src="article.img"
+          :src="`/cine-verse-website/images/movies/${article.img}`"
           class="img-fluid rounded-start"
           alt="movie image"
           loading="lazy"
@@ -37,7 +37,11 @@
     </div>
   </div>
   <div v-else class="card vertical">
-    <img :src="article.img" class="card-img-top" alt="movie image" />
+    <img
+      :src="`/cine-verse-website/images/movies/${article.img}`"
+      class="card-img-top"
+      alt="movie image"
+    />
     <div class="card-body ps-0 pt-2 pb-3 pb-md-0">
       <div class="card-text ago mb-1">
         {{ article.ago }} - <span>by {{ article.author }}</span>

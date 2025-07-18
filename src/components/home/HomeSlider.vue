@@ -8,9 +8,13 @@
               class="swiper-slide"
               v-for="(slide, index) in slides"
               :key="index"
+              @click="$emit('select', index)"
             >
               <div class="overlay"></div>
-              <img :src="slide.image" :alt="slide.name" />
+              <img
+                :src="`/cine-verse-website/images/movies/${slide.image}`"
+                :alt="slide.name"
+              />
               <div class="info">
                 <h2 class="text name">{{ slide.name }}</h2>
                 <h4 class="text category">{{ slide.category }}</h4>
@@ -19,8 +23,10 @@
             </div>
           </div>
 
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <!-- <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div> -->
+          <div class="swiper-button-prev" @click="$emit('prev')"></div>
+          <div class="swiper-button-next" @click="$emit('next')"></div>
         </div>
       </div>
     </div>
@@ -37,41 +43,16 @@ import "swiper/css/navigation"; // استيراد تنسيق أزرار التن
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
 export default {
+  props: {
+    slides: {
+      type: Array,
+      required: true,
+    },
+  },
+  emits: ["prev", "next"],
   data() {
     return {
       swiper: null,
-      slides: [
-        {
-          image: "movie/den.jpg",
-          name: "den of thieves",
-          category: "action",
-          description: "Professional thieves face fierce cops",
-        },
-        {
-          image: "movie/fight-club.jpg",
-          name: "fight club",
-          category: "drama",
-          description: "A secret club changes everything",
-        },
-        {
-          image: "movie/the-revenant.jpg",
-          name: "The revenant",
-          category: "drama",
-          description: "A survival battle in wilderness",
-        },
-        {
-          image: "movie/bad-boys.jpg",
-          name: "Bad Boys",
-          category: "comedy",
-          description: "Rebels cops take on crime",
-        },
-        {
-          image: "movie/joker.jpg",
-          name: "joker",
-          category: "crime",
-          description: "Joker unleashes chaos in Gotham",
-        },
-      ],
     };
   },
   mounted() {
@@ -126,7 +107,8 @@ export default {
 
 .overlay {
   /* background-color: rgba(90, 104, 144, 0.5); */
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
   left: 0;

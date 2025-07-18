@@ -38,7 +38,7 @@
                   muted
                   loop
                   playsinline
-                  poster="/movie/bad-boys-4-poster.jpg"
+                  poster="/images/movies/bad-boys-4-poster.jpg"
                   @click="playVideo"
                 >
                   <source src="/videos/bad-boys-trailer.mp4" type="video/mp4" />
@@ -56,7 +56,7 @@
                   muted
                   loop
                   playsinline
-                  poster="/movie/gladiator-2-poster.jpg"
+                  poster="/images/movies/gladiator-2-poster.jpg"
                   @click="playVideo"
                 >
                   <source
@@ -77,7 +77,7 @@
                   muted
                   loop
                   playsinline
-                  poster="/movie/deadpool-3-poster.jpg"
+                  poster="/images/movies/deadpool-3-poster.jpg"
                   @click="playVideo"
                 >
                   <source

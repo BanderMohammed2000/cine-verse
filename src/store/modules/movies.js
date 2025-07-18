@@ -81,7 +81,7 @@ const actions = {
       id: movie.id,
       poster_path: movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "/movie/no-image.png",
+        : "/cine-verse-website/images/movies/no-image.png",
       title: movie.title,
       release_date: movie.release_date?.slice(0, 4) || "N/A",
       vote_average: Number(movie.vote_average).toFixed(1),

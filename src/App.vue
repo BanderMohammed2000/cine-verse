@@ -118,4 +118,11 @@ body {
 .light-pink-background {
   background-color: var(--main-color);
 }
+
+@media (max-width: 575.98px) {
+  .container-fluid {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
 </style>

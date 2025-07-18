@@ -7,7 +7,11 @@
   <ul class="mt-4">
     <li v-for="(person, index) in people" :key="index">
       <div class="info">
-        <img :src="person.img" alt="person image" loading="lazy" />
+        <img
+          :src="`/cine-verse-website/images/people/${person.img}`"
+          alt="person image"
+          loading="lazy"
+        />
         <p class="mb-0" :title="person.name">{{ person.name }}</p>
       </div>
       <span class="points">{{ person.points }}</span>
