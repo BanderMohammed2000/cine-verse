@@ -55,42 +55,43 @@ export default {
     const base = import.meta.env.BASE_URL;
     return {
       images: [
-        `${base}images/movies/den-bk.jpg`,
-        `${base}images/movies/fight-club-bk.jpeg`,
-        `${base}images/movies/the-Revenant-bk.jpg`,
-        `${base}images/movies/bad-boys4-bk.jpg`,
-        `${base}images/movies/joker-bk.webp`,
+        `${base}images/movies/ballerina-bk.webp`,
+        `${base}images/movies/sinners-bk.webp`,
+        `${base}images/movies/thunderbolts-bk.jpg`,
+        `${base}images/movies/28-years-later-bk.avif`,
+        `${base}images/movies/the-final-reckoning-bk.webp`,
       ],
       slides: [
         {
-          image: "den.jpg",
-          name: "den of thieves",
+          image: "ballerina.jpg",
+          name: "Ballerina",
           category: "action",
-          description: "Professional thieves face fierce cops",
+          description: "Assassin seeks revenge through ballet",
         },
         {
-          image: "fight-club.jpg",
-          name: "fight club",
-          category: "drama",
-          description: "A secret club changes everything",
+          image: "sinners.jpg",
+          name: "sinners",
+          category: "horror",
+          description: "Secrets unravel in twisted town",
         },
         {
-          image: "the-revenant.jpg",
-          name: "The revenant",
-          category: "drama",
-          description: "A survival battle in wilderness",
+          image: "thunderbolts.jpg",
+          name: "Thunderbolts",
+          category: "action",
+          description: "Misfits unite for dangerous mission",
         },
         {
-          image: "bad-boys.jpg",
-          name: "Bad Boys",
-          category: "comedy",
-          description: "Rebels cops take on crime",
+          image: "28-years-later.jpg",
+          name: "28 Years Later",
+          category: "horror",
+          description: "Virus resurfaces after long silence",
         },
+
         {
-          image: "joker.jpg",
-          name: "joker",
-          category: "crime",
-          description: "Joker unleashes chaos in Gotham",
+          image: "the-final-reckoning.webp",
+          name: "Final Reckoning",
+          category: "action",
+          description: "Survivors confront ultimate buried truth",
         },
       ],
       currentIndex: 2,
@@ -197,6 +198,7 @@ export default {
   will-change: transform, opacity;
   opacity: 0;
   filter: blur(3px);
+  /* filter: blur(1px); */
 }
 
 .app__bg__image img {
@@ -277,6 +279,9 @@ export default {
 @media (max-width: 575.98px) {
   #header h1 {
     font-size: 1.5rem;
+  }
+  .app__bg__image {
+    filter: blur(0);
   }
 }
 </style>
