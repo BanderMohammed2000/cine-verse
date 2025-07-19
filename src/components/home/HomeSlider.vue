@@ -12,7 +12,7 @@
             >
               <div class="overlay"></div>
               <img
-                :src="`/cine-verse-website/images/movies/${slide.image}`"
+                :src="`${getBaseUrl()}images/movies/${slide.image}`"
                 :alt="slide.name"
               />
               <div class="info">
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import.meta.env.BASE_URL;
 import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -87,6 +88,11 @@ export default {
         },
       },
     });
+  },
+  methods: {
+    getBaseUrl() {
+      return import.meta.env.BASE_URL;
+    },
   },
 };
 </script>

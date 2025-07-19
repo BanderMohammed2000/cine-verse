@@ -17,7 +17,7 @@
     <div class="container-fluid title-header position-relative">
       <div class="row">
         <div class="col-12">
-          <h1 class="text-center responsive-text mb-5">
+          <h1 class="text-center mb-5">
             Your Weekend Buddy For
             <span class="light-pink-color">This Week</span>
           </h1>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import.meta.env.BASE_URL;
 import gsap from "gsap";
 
 import HomeSlider from "../home/HomeSlider.vue";
@@ -43,21 +44,22 @@ export default {
     HomeSlider,
     TheNavbar,
   },
-  props: {
-    currentIndex: {
-      type: Number,
-      required: true,
-    },
-  },
+  // props: {
+  //   currentIndex: {
+  //     type: Number,
+  //     required: true,
+  //   },
+  // },
 
   data() {
+    const base = import.meta.env.BASE_URL;
     return {
       images: [
-        "/cine-verse-website/images/movies/den-bk.jpg",
-        "/cine-verse-website/images/movies/fight-club-bk.jpeg",
-        "/cine-verse-website/images/movies/the-Revenant-bk.jpg",
-        "/cine-verse-website/images/movies/bad-boys4-bk.jpg",
-        "/cine-verse-website/images/movies/joker-bk.webp",
+        `${base}images/movies/den-bk.jpg`,
+        `${base}images/movies/fight-club-bk.jpeg`,
+        `${base}images/movies/the-Revenant-bk.jpg`,
+        `${base}images/movies/bad-boys4-bk.jpg`,
+        `${base}images/movies/joker-bk.webp`,
       ],
       slides: [
         {
@@ -109,6 +111,9 @@ export default {
     // prevSlide() {
     //   this.currentIndex =
     //     (this.currentIndex - 1 + this.images.length) % this.images.length;
+    // },
+    // getBaseUrl() {
+    //   return import.meta.env.BASE_URL;
     // },
     handleCardSelect(index) {
       this.currentIndex = index;
@@ -262,9 +267,16 @@ export default {
 #header h1 {
   color: var(--secondary-color);
   line-height: 1.5;
+  font-size: 1.9rem;
 }
 
 #header .title-header {
   margin-top: 4rem;
+}
+
+@media (max-width: 575.98px) {
+  #header h1 {
+    font-size: 1.5rem;
+  }
 }
 </style>

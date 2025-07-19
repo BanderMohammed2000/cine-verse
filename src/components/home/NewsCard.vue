@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <!-- img -->
         <img
-          :src="`/cine-verse-website/images/movies/${article.img}`"
+          :src="`${getBaseUrl()}images/movies/${article.img}`"
           class="img-fluid rounded-start"
           alt="movie image"
           loading="lazy"
@@ -38,7 +38,7 @@
   </div>
   <div v-else class="card vertical">
     <img
-      :src="`/cine-verse-website/images/movies/${article.img}`"
+      :src="`${getBaseUrl()}images/movies/${article.img}`"
       class="card-img-top"
       alt="movie image"
     />
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import.meta.env.BASE_URL;
 export default {
   props: {
     verticalCard: {
@@ -65,6 +66,11 @@ export default {
       type: Object,
       required: false,
       default: false,
+    },
+  },
+  methods: {
+    getBaseUrl() {
+      return import.meta.env.BASE_URL;
     },
   },
 };

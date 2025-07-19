@@ -8,7 +8,7 @@
     <li v-for="(person, index) in people" :key="index">
       <div class="info">
         <img
-          :src="`/cine-verse-website/images/people/${person.img}`"
+          :src="`${getBaseUrl()}images/people/${person.img}`"
           alt="person image"
           loading="lazy"
         />
@@ -20,8 +20,14 @@
 </template>
 
 <script>
+import.meta.env.BASE_URL;
 export default {
   props: ["people"],
+  methods: {
+    getBaseUrl() {
+      return import.meta.env.BASE_URL;
+    },
+  },
 };
 </script>
 
