@@ -22,9 +22,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div> -->
           <div class="swiper-button-prev" @click="$emit('prev')"></div>
           <div class="swiper-button-next" @click="$emit('next')"></div>
         </div>
@@ -81,10 +78,28 @@ export default {
         nextEl: ".swiper-button-next", // تفعيل زر التالي
         prevEl: ".swiper-button-prev", // تفعيل زر السابق
       },
+      // on: {
+      //   click: (event) => {
+      //     this.swiper.slideTo(this.swiper.clickedIndex);
+      //     console.log(event);
+      //   },
+      //   slideChange: () => {
+      //     this.$emit("select", this.swiper.realIndex);
+      //   },
+      // },
       on: {
-        click: (event) => {
-          this.swiper.slideTo(this.swiper.clickedIndex);
-          console.log(event);
+        click: () => {
+          if (
+            this.swiper &&
+            this.swiper.clickedIndex !== this.swiper.activeIndex
+          ) {
+            this.swiper.slideTo(this.swiper.clickedIndex);
+          }
+        },
+        transitionEnd: () => {
+          if (this.swiper) {
+            this.$emit("select", this.swiper.realIndex);
+          }
         },
       },
     });
