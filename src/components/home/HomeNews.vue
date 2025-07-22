@@ -4,7 +4,10 @@
       <div class="row">
         <div class="col-md-4 order-1 order-md-0 mt-5 mt-md-0">
           <div class="col">
-            <h5>Hall Of <span class="light-pink-color">Fame</span></h5>
+            <div class="wrapper">
+              <h5 class="split-text" ref="splitText"></h5>
+            </div>
+            <!-- <h5>Hall Of <span class="light-pink-color">Fame</span></h5> -->
           </div>
           <div class="hall-of-fame" id="reviewers">
             <list-people :people="reviewers">Top Reviewers</list-people>
@@ -80,6 +83,13 @@
 </template>
 
 <script>
+import { isInViewport } from "../../utils/viewport";
+import { splitNode } from "../../utils/splitnode";
+import { gsap } from "gsap";
+import TextPlugin from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
+
 import NewsCard from "./NewsCard.vue";
 import ListPeople from "./ListPeople.vue";
 import { Carousel } from "bootstrap";
@@ -91,6 +101,7 @@ export default {
   },
   data() {
     return {
+      rawMessage: `Hall Of <span class="light-pink-color">Fame</span>`,
       carousel: null,
       news: [
         [
@@ -176,8 +187,48 @@ export default {
     if (this.$refs.carouselExample) {
       this.carousel = new Carousel(this.$refs.carouselExample);
     }
+
+    document.fonts.ready.then(() => {
+      window.addEventListener("scroll", this.checkVisibility);
+      // تأكد أيضاً عند التحميل الأول
+      this.checkVisibility();
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.checkVisibility);
   },
   methods: {
+    checkVisibility() {
+      const el = this.$refs.splitText;
+      if (el && isInViewport(el)) {
+        const message = this.rawMessage;
+        const el = this.$refs.splitText;
+        el.innerHTML = "";
+
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = message;
+
+        tempDiv.childNodes.forEach((node) => {
+          el.appendChild(splitNode(node));
+        });
+
+        const spans = el.querySelectorAll("span");
+        gsap.fromTo(
+          spans,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: "power2.out",
+          }
+        );
+
+        window.removeEventListener("scroll", this.checkVisibility);
+      }
+    },
+
     moveNext() {
       if (this.carousel) {
         this.carousel.cycle();

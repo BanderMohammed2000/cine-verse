@@ -253,9 +253,10 @@ export default {
 .info .category::after {
   content: "";
   position: absolute;
-  background: #fff;
+  background-color: #fff;
   left: 0%;
 }
+
 .info .category::before {
   transform: translate(-28px, 5px);
 }

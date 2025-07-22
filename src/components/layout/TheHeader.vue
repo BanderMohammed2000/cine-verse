@@ -17,10 +17,9 @@
     <div class="container-fluid title-header position-relative">
       <div class="row">
         <div class="col-12">
-          <h1 class="text-center mb-5">
-            Your Weekend Buddy For
-            <span class="light-pink-color">This Week</span>
-          </h1>
+          <div class="wrapper">
+            <h1 class="split-text text-center mb-5" ref="splitText"></h1>
+          </div>
         </div>
       </div>
     </div>
@@ -35,7 +34,11 @@
 
 <script>
 import.meta.env.BASE_URL;
-import gsap from "gsap";
+import { splitNode } from "../../utils/splitnode";
+import { gsap } from "gsap";
+import TextPlugin from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
 
 import HomeSlider from "../home/HomeSlider.vue";
 import TheNavbar from "./TheNavbar.vue";
@@ -54,6 +57,7 @@ export default {
   data() {
     const base = import.meta.env.BASE_URL;
     return {
+      rawMessage: `Your Weekend Buddy For <span class="light-pink-color">This Week</span>`,
       images: [
         `${base}images/movies/ballerina-bk.webp`,
         `${base}images/movies/sinners-bk.webp`,
@@ -104,6 +108,9 @@ export default {
     //     gsap.set(el, { opacity: 0 });
     //   }
     // });
+    document.fonts.ready.then(() => {
+      this.runSplitTextAnimation();
+    });
   },
   methods: {
     // nextSlide() {
@@ -116,6 +123,32 @@ export default {
     // getBaseUrl() {
     //   return import.meta.env.BASE_URL;
     // },
+    runSplitTextAnimation() {
+      const message = this.rawMessage;
+      const el = this.$refs.splitText;
+      el.innerHTML = "";
+
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = message;
+
+      tempDiv.childNodes.forEach((node) => {
+        el.appendChild(splitNode(node));
+      });
+
+      const spans = el.querySelectorAll("span");
+      gsap.fromTo(
+        spans,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.04,
+          ease: "power2.out",
+        }
+      );
+    },
+
     handleCardSelect(index) {
       this.currentIndex = index;
     },

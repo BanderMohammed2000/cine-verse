@@ -5,9 +5,12 @@
         <div class="col-lg-5 my-auto">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">
+              <div class="wrapper card-title">
+                <h4 class="split-text" ref="splitText"></h4>
+              </div>
+              <!-- <h4 class="card-title">
                 About <span class="light-pink-color">Us</span>
-              </h4>
+              </h4> -->
               <p class="card-text mt-3">
                 CineVerse is a simple and easy-to-use platform made for everyone
                 who loves movies. Here, you can explore a wide variety of films
@@ -96,8 +99,60 @@
 </template>
 
 <script>
+import { isInViewport } from "../../utils/viewport";
+import { splitNode } from "../../utils/splitnode";
+import { gsap } from "gsap";
+import TextPlugin from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
+
 export default {
+  data() {
+    return {
+      rawMessage: `About <span class="light-pink-color">Us</span>`,
+    };
+  },
+  mounted() {
+    document.fonts.ready.then(() => {
+      window.addEventListener("scroll", this.checkVisibility);
+      // تأكد أيضاً عند التحميل الأول
+      this.checkVisibility();
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.checkVisibility);
+  },
   methods: {
+    checkVisibility() {
+      const el = this.$refs.splitText;
+      if (el && isInViewport(el)) {
+        const message = this.rawMessage;
+        const el = this.$refs.splitText;
+        el.innerHTML = "";
+
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = message;
+
+        tempDiv.childNodes.forEach((node) => {
+          el.appendChild(splitNode(node));
+        });
+
+        const spans = el.querySelectorAll("span");
+        gsap.fromTo(
+          spans,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: "power2.out",
+          }
+        );
+
+        window.removeEventListener("scroll", this.checkVisibility);
+      }
+    },
     playVideo(e) {
       const media = e.target.offsetParent;
       let isPlaying = !e.target.paused;

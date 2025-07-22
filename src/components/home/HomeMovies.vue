@@ -3,9 +3,12 @@
     <div class="container-fluid py-5">
       <div class="row mb-5 mb-md-4 mb-lg-5">
         <div class="col-lg-4 col-md-12 col-sm-6">
-          <h4 class="movie-title">
+          <!-- <h4 class="movie-title">
             Discover <span class="light-pink-color">Movies</span>
-          </h4>
+          </h4> -->
+          <div class="wrapper">
+            <h4 class="split-text movie-title" ref="splitText"></h4>
+          </div>
         </div>
         <div
           class="col-lg-4 col-md-6 col-sm-12 mt-3 mt-lg-0 order-1 order-md-0"
@@ -132,6 +135,13 @@
 </template>
 
 <script>
+import { isInViewport } from "../../utils/viewport";
+import { splitNode } from "../../utils/splitnode";
+import { gsap } from "gsap";
+import TextPlugin from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
+
 // import movies from "../../store/modules/movies";
 import BaseButton from "../ui/BaseButton.vue";
 import MovieCard from "./MovieCard.vue";
@@ -143,6 +153,7 @@ export default {
   },
   data() {
     return {
+      rawMessage: `Discover <span class="light-pink-color">Movies</span>`,
       buttonClicked: "random",
       isLoading: false,
       currentPage: 1,
@@ -195,6 +206,16 @@ export default {
       //   },
       // ],
     };
+  },
+  mounted() {
+    document.fonts.ready.then(() => {
+      window.addEventListener("scroll", this.checkVisibility);
+      // تأكد أيضاً عند التحميل الأول
+      this.checkVisibility();
+    });
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.checkVisibility);
   },
 
   // async created() {
@@ -394,6 +415,37 @@ export default {
 
     //   return this.movies;
     // },
+
+    checkVisibility() {
+      const el = this.$refs.splitText;
+      if (el && isInViewport(el)) {
+        const message = this.rawMessage;
+        const el = this.$refs.splitText;
+        el.innerHTML = "";
+
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = message;
+
+        tempDiv.childNodes.forEach((node) => {
+          el.appendChild(splitNode(node));
+        });
+
+        const spans = el.querySelectorAll("span");
+        gsap.fromTo(
+          spans,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            stagger: 0.04,
+            ease: "power2.out",
+          }
+        );
+
+        window.removeEventListener("scroll", this.checkVisibility);
+      }
+    },
 
     async setFromQuery() {
       this.isLoading = true;
