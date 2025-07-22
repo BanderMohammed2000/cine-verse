@@ -168,14 +168,14 @@ export default {
         ],
       ],
       reviewers: [
-        { name: "Bader Ali", img: "1.jpg", points: "2544" },
+        { name: "Bader Mohammed", img: "1.jpg", points: "2544" },
         { name: "Nader Fahed", img: "6.jpg", points: "2450" },
         { name: "Ali Ahmed", img: "3.png", points: "2300" },
         { name: "Bander Mohammed", img: "4.png", points: "2278" },
         { name: "Faisal Salem", img: "5.png", points: "2228" },
       ],
       fandom: [
-        { name: "Bader Ali", img: "1.jpg", points: "2544" },
+        { name: "Bader Mohammed", img: "1.jpg", points: "2544" },
         { name: "Nader Fahed", img: "6.jpg", points: "2450" },
         { name: "Ali Ahmed", img: "3.png", points: "2300" },
         { name: "Bander Mohammed", img: "4.png", points: "2278" },
