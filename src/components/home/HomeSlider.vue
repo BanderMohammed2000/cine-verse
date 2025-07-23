@@ -17,7 +17,7 @@
               />
               <div class="info">
                 <h2 class="text name">{{ slide.name }}</h2>
-                <h4 class="text category">{{ slide.category }}</h4>
+                <h3 class="text category">{{ slide.category }}</h3>
                 <p class="text description">{{ slide.description }}</p>
               </div>
             </div>
@@ -186,6 +186,10 @@ export default {
 
 .info .text {
   position: relative;
+}
+
+.info .category {
+  font-size: 1.5rem;
 }
 
 .info .name,

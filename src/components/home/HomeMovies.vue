@@ -104,6 +104,7 @@
             <button
               @click="goToPage(currentPage - 1)"
               :disabled="currentPage === 1"
+              aria-label="Previous page"
             >
               <i class="fa-solid fa-angle-left"></i>
             </button>
@@ -115,6 +116,7 @@
               :disabled="page === '...'"
               :class="{ active: page === currentPage, dots: page === '...' }"
               @click="page !== '...' && goToPage(page)"
+              aria-label="Page number"
             >
               {{ page }}
             </button>
@@ -123,6 +125,7 @@
             <button
               @click="goToPage(currentPage + 1)"
               :disabled="currentPage === totalPages"
+              aria-label="Next page"
             >
               <i class="fa-solid fa-angle-right"></i>
             </button>
