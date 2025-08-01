@@ -7,7 +7,6 @@
             <div class="wrapper">
               <h5 class="split-text" ref="splitText"></h5>
             </div>
-            <!-- <h5>Hall Of <span class="light-pink-color">Fame</span></h5> -->
           </div>
           <div class="hall-of-fame" id="reviewers">
             <list-people :people="reviewers">Top Reviewers</list-people>
@@ -52,27 +51,8 @@
                         :article="article"
                       ></news-card>
                     </div>
-                    <!-- <div class="col-md-4">
-                      <news-card verticalCard></news-card>
-                    </div> -->
-                    <!-- <div class="col-md-4">
-                      <news-card verticalCard></news-card>
-                    </div>
-                    <div class="col-md-4">
-                      <news-card verticalCard></news-card>
-                    </div> -->
                   </div>
                 </div>
-                <!-- <div class="carousel-item">
-                  <img src="/movie/joker.jpg" class="d-block w-100" alt="..." />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="/movie/the-revenant.jpg"
-                    class="d-block w-100"
-                    alt="..."
-                  />
-                </div> -->
               </div>
             </div>
           </div>
