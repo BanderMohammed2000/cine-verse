@@ -35,9 +35,7 @@ import.meta.env.BASE_URL;
 import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-// import "swiper/css/pagination";
 import "swiper/css/navigation"; // استيراد تنسيق أزرار التنقل
-// import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
 export default {
@@ -55,7 +53,6 @@ export default {
   },
   mounted() {
     this.swiper = new Swiper(".swiper", {
-      //   modules: [EffectCoverflow, Pagination, Navigation],
       modules: [EffectCoverflow, Navigation],
       effect: "coverflow",
       grabCursor: true,
@@ -71,22 +68,10 @@ export default {
         modifier: 1,
         slideShadows: true,
       },
-      //   pagination: {
-      //     el: ".swiper-pagination",
-      //   },
       navigation: {
         nextEl: ".swiper-button-next", // تفعيل زر التالي
         prevEl: ".swiper-button-prev", // تفعيل زر السابق
       },
-      // on: {
-      //   click: (event) => {
-      //     this.swiper.slideTo(this.swiper.clickedIndex);
-      //     console.log(event);
-      //   },
-      //   slideChange: () => {
-      //     this.$emit("select", this.swiper.realIndex);
-      //   },
-      // },
       on: {
         click: () => {
           if (
@@ -123,12 +108,9 @@ export default {
 
 .swiper {
   width: 100%;
-  /* padding: 50px 0; */
 }
 
 .overlay {
-  /* background-color: rgba(90, 104, 144, 0.5); */
-  /* background-color: rgba(0, 0, 0, 0.5); */
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   top: 0;
@@ -136,23 +118,14 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  /* border-radius: 14px; */
 }
-
-/* div.swiper-wrapper {
-  cursor: pointer !important;
-} */
 
 .swiper-slide {
   position: relative;
-  /* height: 450px; */
   width: 320px;
   aspect-ratio: 32/45;
-  /* aspect-ratio: 3/4; */
   border-radius: 8px;
   perspective: 1000px;
-  /* border-radius: 14px; */
-  /* border: 1px solid rgba(177, 177, 177, 0.4); */
 }
 
 .swiper-slide img {
@@ -165,7 +138,6 @@ export default {
 }
 
 .swiper .swiper-slide .info {
-  /* opacity: 0; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -174,15 +146,8 @@ export default {
   color: var(--secondary-color);
   position: absolute;
   top: 50%;
-  /* transform: translateY(50%) translateZ(30px) scale(1.4); */
   transform: translateZ(30px) scale(1.4);
-  /* transition: all 0.4s ease-in; */
 }
-
-/* .swiper .swiper-slide-active .info {
-  opacity: 1;
-  transform: translateY(-70%) translateZ(30px) scale(1.4);
-} */
 
 .info .text {
   position: relative;
@@ -208,18 +173,16 @@ export default {
 .info .name {
   margin-bottom: 0.2rem;
   font-weight: 300;
-  /* transition-delay: 0.1s; */
 }
+
 .info .category {
   margin-bottom: 1.1rem;
   margin-left: 30px;
   font-weight: 500;
-  /* transition-delay: 0.2s; */
 }
 
 .info .description {
   font-size: 13px;
-  /* transition-delay: 0.3s; */
 }
 
 .swiper-slide-active .info .name {
@@ -291,14 +254,6 @@ export default {
   font-size: 27px;
   color: var(--secondary-color);
 }
-
-/* .swiper-button-prev {
-  left: 65px;
-}
-
-.swiper-button-next {
-  right: 65px;
-} */
 
 @media (max-width: 1100px) {
   .swiper-slide {

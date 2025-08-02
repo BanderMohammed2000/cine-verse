@@ -27,15 +27,16 @@ export default {
 footer {
   background-color: #0f152b;
 }
+
 .col {
   color: var(--secondary-color);
   position: relative;
 }
+
 .col::before {
   content: "";
   width: 70%;
   height: 1px;
-  /* background-color: #353535; */
   background-color: var(--secondary-color);
   opacity: 0.1;
   position: absolute;

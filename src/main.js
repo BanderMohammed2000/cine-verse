@@ -20,11 +20,4 @@ app.component("base-input", BaseInput);
 app.use(router);
 app.use(store);
 
-// Promise.all([
-//   document.fonts.load('1rem "Poppins"'),
-//   document.fonts.load('1rem "Tajawal"'),
-// ]).then(() => {
-//   document.body.style.visibility = "visible";
-// });
-
 app.mount("#app");

@@ -9,8 +9,12 @@
             </div>
           </div>
           <div class="hall-of-fame" id="reviewers">
-            <list-people :people="reviewers">Top Reviewers</list-people>
-            <list-people :people="fandom">Top Fandom</list-people>
+            <list-people :people="reviewers"
+              ><h6 class="mt-3">Top Reviewers</h6></list-people
+            >
+            <list-people :people="fandom">
+              <h6 class="mt-5">Top Fandom</h6>
+            </list-people>
           </div>
         </div>
         <div class="col-md-8">
@@ -229,26 +233,48 @@ export default {
 section#news {
   background-color: #0f152b;
 }
+
 .news-section {
-  /* padding: 43px 30px; */
   padding: 30px 20px;
-  /* background-color: #0c0f22; */
   background-color: #121832;
   border-radius: 5px;
 }
+
 .carousel-item {
   padding: 0 10px;
 }
+
 h5 {
   color: var(--secondary-color);
 }
+
 .title-section {
   color: var(--secondary-color);
 }
+
 .prev,
 .next {
   color: var(--secondary-color);
   cursor: pointer;
+}
+
+h6 {
+  position: relative;
+  color: #e8e8e8;
+  font-size: 16px;
+  font-weight: normal;
+  padding-bottom: 19px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h6::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 120px;
+  height: 1px;
+  background-color: var(--main-color);
 }
 
 /*لوضع القسمين نفس الحجم*/

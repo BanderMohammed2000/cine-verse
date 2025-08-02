@@ -10,11 +10,9 @@ export default {
   computed: {
     activeView() {
       if (this.$route.path === "/login") {
-        // console.log("login");
         return LoginView;
       }
       if (this.$route.path === "/register") {
-        // console.log("register");
         return RegisterView;
       }
       return null;

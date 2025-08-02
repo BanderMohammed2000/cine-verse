@@ -29,14 +29,6 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   // نحفظ الخلفية في meta إذا كان الانتقال إلى /login
-//   if ((to.path === "/login" || to.path === "/register") && from.name) {
-//     to.meta.background = from;
-//   }
-//   next();
-// });
-
 // خارج تعريف router
 const historyStack = [];
 

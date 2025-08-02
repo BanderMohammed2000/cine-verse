@@ -19,7 +19,6 @@
 <style scoped>
 .not-found {
   height: 100vh;
-  /* background-color: #0a0f23; */
   background-color: #121832;
   display: flex;
   align-items: center;

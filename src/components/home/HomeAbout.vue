@@ -8,9 +8,6 @@
               <div class="wrapper card-title">
                 <h4 class="split-text" ref="splitText"></h4>
               </div>
-              <!-- <h4 class="card-title">
-                About <span class="light-pink-color">Us</span>
-              </h4> -->
               <p class="card-text mt-3">
                 CineVerse is a simple and easy-to-use platform made for everyone
                 who loves movies. Here, you can explore a wide variety of films
@@ -174,28 +171,26 @@ export default {
 section#about {
   background-color: #0f152b;
 }
+
 .card {
   border: 0;
   background-color: transparent;
   color: var(--secondary-color);
 }
+
 .card-body {
-  /* padding-left: 0; */
   padding: 0;
 }
-.card-title {
-  /* width: 390px; */
-  /* font-weight: 500; */
-}
+
 .card-text {
-  /* color: #6d6d6d; */
-  /* width: 85%; */
   opacity: 0.7;
   font-size: 15px;
 }
+
 .media {
   position: relative;
 }
+
 .play-icon {
   position: absolute;
   top: 50%;
@@ -206,14 +201,11 @@ section#about {
 .media video {
   width: 100%;
   border-radius: 8px;
-  /* max-height: 200px; */
   height: 200px;
   object-fit: cover;
   cursor: pointer;
 }
-.video-1 video {
-  /* border: 1px solid var(--dark-teal); */
-}
+
 .media h4 {
   color: var(--secondary-color);
   margin: 0;
@@ -237,7 +229,6 @@ section#about {
     right: 50px;
     top: 50%;
     transform: translateY(-50%);
-    /* font-size: 30px; */
   }
   .video-2 h4,
   .video-3 h4 {
@@ -250,7 +241,6 @@ section#about {
     bottom: 30px;
     left: 55%;
     transform: translate(-50%, 0);
-    /* font-size: calc(1.275rem + 0.3vw); */
   }
 }
 

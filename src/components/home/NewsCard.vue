@@ -88,7 +88,6 @@ export default {
 
 .card.horizontal img {
   height: 300px;
-  /* max-height: 284px; */
   width: 100%;
 }
 
@@ -126,25 +125,6 @@ export default {
 .card.vertical img {
   height: 170px;
 }
-
-/*لوضع القسمين نفس الحجم*/
-/* ملاحظة: لو كان في margin عناصر الابناء راح يتم احتسابه ضمن الطول !!!*/
-/* .card.horizontal > .row {
-  display: flex;
-  align-items: stretch;
-}
-.card.horizontal > .row > .col-md-6,
-.card.horizontal > .row > .col-md-6 {
-  display: flex;
-  flex-direction: column;
-}
-
-.card.horizontal .col-md-6 img,
-.card.horizontal .col-md-6 .card {
-  flex: 1;
-} */
-
-/*النهاية*/
 
 @media (max-width: 767.98px) {
   .card.vertical img {

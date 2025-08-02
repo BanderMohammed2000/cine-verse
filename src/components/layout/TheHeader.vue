@@ -1,7 +1,6 @@
 <template>
   <header id="header" class="pb-5">
     <div class="overlay"></div>
-    <!-- <div class="header-background"></div> -->
     <div class="background-wrapper">
       <div
         v-for="(image, index) in images"
@@ -47,13 +46,6 @@ export default {
     HomeSlider,
     TheNavbar,
   },
-  // props: {
-  //   currentIndex: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  // },
-
   data() {
     const base = import.meta.env.BASE_URL;
     return {
@@ -102,27 +94,11 @@ export default {
     };
   },
   mounted() {
-    // إخفاء كل الصور ما عدا الصورة الأولى
-    // this.$refs.bgImages.forEach((el, index) => {
-    //   if (index !== this.currentIndex) {
-    //     gsap.set(el, { opacity: 0 });
-    //   }
-    // });
     document.fonts.ready.then(() => {
       this.runSplitTextAnimation();
     });
   },
   methods: {
-    // nextSlide() {
-    //   this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    // },
-    // prevSlide() {
-    //   this.currentIndex =
-    //     (this.currentIndex - 1 + this.images.length) % this.images.length;
-    // },
-    // getBaseUrl() {
-    //   return import.meta.env.BASE_URL;
-    // },
     runSplitTextAnimation() {
       const message = this.rawMessage;
       const el = this.$refs.splitText;
@@ -161,24 +137,6 @@ export default {
       this.currentIndex = (this.currentIndex + 1) % total;
     },
 
-    // getImageClass(index) {
-    //   const total = this.images.length;
-    //   const current = this.currentIndex;
-
-    //   const previous = (current - 1 + total) % total;
-    //   const next = (current + 1) % total;
-    //   const lastPrevious = (current - 2 + total) % total;
-    //   const lastNext = (current + 2) % total;
-
-    //   if (index === current) return "current--image";
-    //   if (index === previous) return "previous--image";
-    //   if (index === next) return "next--image";
-    //   if (index === lastPrevious) return "last--previous--image";
-    //   if (index === lastNext) return "last--next--image";
-
-    //   return "";
-    // },
-
     getImageClass(index) {
       const total = this.images.length;
       const current = this.currentIndex;
@@ -202,8 +160,7 @@ export default {
 
 <style scoped>
 #header {
-  position: relative; /* ✅ المرجع النسبي */
-  /* height: 100vh;  */
+  position: relative;
   overflow: hidden;
   width: 100%;
 }
@@ -214,10 +171,9 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  z-index: -2; /* تأكد أنها تحت الـ overlay والمحتوى */
+  z-index: -2;
 }
 
-/* الصور */
 .app__bg__image {
   position: absolute;
   left: 50%;
@@ -231,7 +187,6 @@ export default {
   will-change: transform, opacity;
   opacity: 0;
   filter: blur(3px);
-  /* filter: blur(1px); */
 }
 
 .app__bg__image img {
@@ -256,41 +211,11 @@ export default {
 .app__bg__image.last--next--image {
   --image-translate-offset: 50%;
 }
-/* الزر */
-/* .next-button {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  padding: 10px 20px;
-  background-color: white;
-  border: none;
-  cursor: pointer;
-} */
 
 /* ---------------------------------------------- */
 
-/* #header {
-  position: relative;
-} */
-.header-background {
-  width: 100%;
-  height: 100%;
-  background-image: url("/movie/fight-club-bk.jpeg");
-  /* background-image: url("/movie/breaking-bad.jpg"); */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  z-index: -2;
-  /* filter: blur(3px); */
-  /* filter: blur(5px); */
-}
 .overlay {
-  /* background-color: rgba(10, 15, 34, 0.5); */
   background-color: rgba(14, 23, 54, 0.5);
-  /* background-color: rgba(0, 0, 0, 0.5); */
   position: absolute;
   top: 0;
   left: 0;

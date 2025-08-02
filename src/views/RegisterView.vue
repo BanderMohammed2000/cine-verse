@@ -18,20 +18,6 @@
         placeholder="Enter your email"
         v-model.trim="email"
       ></base-input>
-      <!-- <base-input
-        v-for="passInput in 2"
-        :key="passInput"
-        type="password"
-        :placeholder="`${
-          passInput - 1 ? 'Confirm password' : 'Create password'
-        }`"
-      ></base-input> -->
-      <!-- <base-input
-        v-for="(label, index) in ['Create password', 'Confirm password']"
-        :key="index"
-        type="password"
-        :placeholder="label"
-      ></base-input> -->
       <base-input
         type="password"
         placeholder="Create password"
@@ -100,13 +86,6 @@ export default {
       this.errorMessage = "";
       this.formIsValid = true;
     },
-    // closeRegister() {
-    //   const backgroundPath = this.$route.meta.background?.fullPath || "/";
-    //   const route = backgroundPath === "/login" ? "/" : backgroundPath;
-    //   this.$router.push(route);
-    //   document.body.style.overflow = "";
-    // },
-
     closeRegister() {
       const backgroundPath = this.$route.meta.background?.fullPath || "/";
       const history = this.$route.meta.historyStack || [];
@@ -114,7 +93,6 @@ export default {
       let route = backgroundPath;
 
       if (backgroundPath === "/login") {
-        // نحاول نرجع إلى صفحة قبل /login أو /register
         const previous = history
           .reverse()
           .find((r) => r.fullPath !== "/login" && r.fullPath !== "/register");
@@ -141,6 +119,7 @@ export default {
   background-color: var(--secondary-color);
   z-index: 101;
 }
+
 .form-model > div {
   display: flex;
   justify-content: space-between;
