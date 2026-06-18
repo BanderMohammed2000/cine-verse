@@ -9,7 +9,7 @@ export default defineConfig({
     minify: "esbuild",
   },
   server: {
-    port: 3000,
+    port: 5000,
     host: "127.0.0.1",
   },
 });

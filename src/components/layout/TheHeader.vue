@@ -22,12 +22,7 @@
         </div>
       </div>
     </div>
-    <home-slider
-      :slides="slides"
-      @next="nextSlide"
-      @prev="prevSlide"
-      @select="handleCardSelect"
-    ></home-slider>
+    <home-slider :slides="slides" @select="handleCardSelect"></home-slider>
   </header>
 </template>
 
@@ -121,7 +116,7 @@ export default {
           duration: 0.5,
           stagger: 0.04,
           ease: "power2.out",
-        }
+        },
       );
     },
 
@@ -183,7 +178,9 @@ export default {
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: transform 1000ms ease, opacity 1000ms ease;
+  transition:
+    transform 1000ms ease,
+    opacity 1000ms ease;
   will-change: transform, opacity;
   opacity: 0;
   filter: blur(3px);

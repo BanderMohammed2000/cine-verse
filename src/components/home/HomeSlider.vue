@@ -2,13 +2,18 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <div class="swiper">
+        <div
+          class="swiper"
+          ref="swiperEl"
+          @pointerdown="handlePointerDown"
+          @pointerup="handlePointerUp"
+        >
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
               v-for="(slide, index) in slides"
               :key="index"
-              @click="$emit('select', index)"
+              :data-index="index"
             >
               <div class="overlay"></div>
               <img
@@ -22,8 +27,19 @@
               </div>
             </div>
           </div>
-          <div class="swiper-button-prev" @click="$emit('prev')"></div>
-          <div class="swiper-button-next" @click="$emit('next')"></div>
+          <div
+            class="swiper-button-prev"
+            ref="prevBtn"
+            @pointerdown.stop
+            @pointerup.stop
+          ></div>
+
+          <div
+            class="swiper-button-next"
+            ref="nextBtn"
+            @pointerdown.stop
+            @pointerup.stop
+          ></div>
         </div>
       </div>
     </div>
@@ -45,21 +61,24 @@ export default {
       required: true,
     },
   },
-  emits: ["prev", "next"],
+  emits: ["prev", "next", "select"],
   data() {
     return {
       swiper: null,
+      pointerStartX: 0,
+      pointerStartY: 0,
     };
   },
   mounted() {
-    this.swiper = new Swiper(".swiper", {
+    this.swiper = new Swiper(this.$refs.swiperEl, {
       modules: [EffectCoverflow, Navigation],
       effect: "coverflow",
       grabCursor: true,
       centeredSlides: true,
       initialSlide: 2,
       speed: 600,
-      preventClicks: true,
+      preventClicks: false,
+      preventClicksPropagation: false,
       slidesPerView: "auto",
       coverflowEffect: {
         rotate: 0,
@@ -69,22 +88,12 @@ export default {
         slideShadows: true,
       },
       navigation: {
-        nextEl: ".swiper-button-next", // تفعيل زر التالي
-        prevEl: ".swiper-button-prev", // تفعيل زر السابق
+        nextEl: this.$refs.nextBtn,
+        prevEl: this.$refs.prevBtn,
       },
       on: {
-        click: () => {
-          if (
-            this.swiper &&
-            this.swiper.clickedIndex !== this.swiper.activeIndex
-          ) {
-            this.swiper.slideTo(this.swiper.clickedIndex);
-          }
-        },
-        transitionEnd: () => {
-          if (this.swiper) {
-            this.$emit("select", this.swiper.realIndex);
-          }
+        slideChange: (swiper) => {
+          this.$emit("select", swiper.activeIndex);
         },
       },
     });
@@ -92,6 +101,36 @@ export default {
   methods: {
     getBaseUrl() {
       return import.meta.env.BASE_URL;
+    },
+    handlePointerDown(event) {
+      this.pointerStartX = event.clientX;
+      this.pointerStartY = event.clientY;
+    },
+
+    handlePointerUp(event) {
+      if (!this.swiper) return;
+
+      if (event.target.closest(".swiper-button-prev, .swiper-button-next"))
+        return;
+
+      const diffX = Math.abs(event.clientX - this.pointerStartX);
+      const diffY = Math.abs(event.clientY - this.pointerStartY);
+
+      if (diffX > 25 || diffY > 25) return;
+
+      const elements = document.elementsFromPoint(event.clientX, event.clientY);
+
+      const slideEl = elements.find((el) =>
+        el.classList?.contains("swiper-slide"),
+      );
+
+      if (!slideEl) return;
+
+      const clickedIndex = Number(slideEl.dataset.index);
+
+      if (Number.isNaN(clickedIndex)) return;
+
+      this.swiper.slideTo(clickedIndex, 600);
     },
   },
 };
